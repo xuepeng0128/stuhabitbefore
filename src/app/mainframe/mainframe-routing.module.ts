@@ -12,7 +12,7 @@ const routes: Routes = [
       children: [
         { path : '' , redirectTo : 'homeComponent', pathMatch: 'full'},
         { path: 'homeComponent', component: HomeComponent }, // 首页
-        { path: 'dictionary', loadChildren: './../dictionary/dictionary.module#DictionaryModule' }, // 账号管理模块
+       // { path: 'dictionary', loadChildren: './../dictionary/dictionary.module#DictionaryModule' }, //
       ]
   }
 
