@@ -43,5 +43,4 @@ insertUser = (user: User ): Observable<User> => {
     return this.httpsvr.onHttpGet('/api/corp/system/user/deleteUser', {account : account});
   }
 
-
 }

@@ -3,6 +3,7 @@ import {UserService} from '../../shared/service/user.service';
 import {Router} from '@angular/router';
 import {UserStorageService} from '../../shared/service/baseapi/user-storage.service';
 import {NzMessageService} from 'ng-zorro-antd';
+import {User} from '../../entity/User';
 
 @Component({
   selector: 'app-singin',
@@ -20,6 +21,7 @@ export class SinginComponent implements OnInit {
     this.loading = false;
     this.usersvr.validateLogin(this.user).subscribe(user => {
         if (user) {
+
           this.user = user;
           this.userstorage.Set(user);
           this.router.navigate(['/']);
