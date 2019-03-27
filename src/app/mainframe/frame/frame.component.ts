@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Menu} from '../../entity/Menu';
-import {MenuService} from '../../system/shared/menu.service';
+
 import {HttpService} from '../../shared/service/baseapi/http.service';
+import {UserService} from '../../shared/user.service';
+import {User} from '../../entity/User';
 
 @Component({
   selector: 'app-frame',
@@ -10,15 +10,14 @@ import {HttpService} from '../../shared/service/baseapi/http.service';
   styleUrls: ['./frame.component.css']
 })
 export class FrameComponent implements OnInit, AfterViewInit {
-  loading = false;
-  menuArray$: Observable<Array<Menu>>; // 菜单
+  loading=false;
+  user: User = this.usersvr.getUserStorage();
   pareMenuName = '';
   subMenuName = '';
   clientHeight: number = document.documentElement.clientHeight - 200; // 客户区高度
-  constructor(private menusvr: MenuService, private httpsvr: HttpService) { }
+  constructor( private httpsvr: HttpService, private usersvr: UserService) { }
 
   ngOnInit() {
-     this.menuArray$ = this.menusvr.onQuery({});
   }
  ngAfterViewInit() {
       setTimeout(() => {

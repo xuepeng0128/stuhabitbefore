@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../shared/service/user.service';
 import {Router} from '@angular/router';
-import {UserStorageService} from '../../shared/service/baseapi/user-storage.service';
-import {NzMessageService} from 'ng-zorro-antd';
 import {User} from '../../entity/User';
+import {flatMap} from 'tslint/lib/utils';
+import {UserService} from '../../shared/user.service';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-singin',
@@ -13,17 +13,17 @@ import {User} from '../../entity/User';
 export class SinginComponent implements OnInit {
   user: User = new User();
   loading = false;
-  constructor(private message: NzMessageService, private usersvr: UserService, private router: Router, private userstorage: UserStorageService ) { }
+  constructor(private message: NzMessageService, private usersvr: UserService,
+              private router: Router ) { }
 
   ngOnInit() {
   }
   onLogin = () => {
     this.loading = false;
-    this.usersvr.validateLogin(this.user).subscribe(user => {
+    this.usersvr.onvalidateLogin(this.user).subscribe(user => {
         if (user) {
-
           this.user = user;
-          this.userstorage.Set(user);
+          this.usersvr.setUserStorage(user);
           this.router.navigate(['/']);
         } else {
           this.loading = false;
