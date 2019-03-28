@@ -8,10 +8,21 @@ import {School} from '../../../entity/School';
 })
 export class SchoolService {
 
-  constructor(private httpsvr : HttpService) { }
+  constructor(private httpsvr: HttpService) { }
 
-  schoolList =(queryparam : any) : Observable<School> =>{
-         return this.httpsvr.onHttpGet('',queryparam);
+  schoolList = (queryparam: any): Observable<Array<School>> => {
+         return this.httpsvr.onHttpGet('/api/corp/basemsg/school/schoolList', queryparam);
   }
 
+  insertSchool = (school: School): Observable<School> => {
+        return this.httpsvr.onHttpPost('/api/corp/basemsg/school/insertSchool', school);
+  }
+
+  updateSchool = (school: School): Observable<School> => {
+        return this.httpsvr.onHttpPost('/api/corp/basemsg/school/updateSchool', school);
+  }
+
+  deleteSchool = (school: School): Observable<string> => {
+    return this.httpsvr.onHttpGet('/api/corp/basemsg/school/deleteSchool', school);
+  }
 }
