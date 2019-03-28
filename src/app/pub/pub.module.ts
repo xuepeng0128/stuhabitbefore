@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
+import { CitySelectComponent } from './components/city-select/city-select.component';
+import { DistrictSelectComponent } from './components/district-select/district-select.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [CitySelectComponent, DistrictSelectComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -20,6 +22,7 @@ import {NgZorroAntdModule} from 'ng-zorro-antd';
     ReactiveFormsModule,
     HttpClientModule,
     NgZorroAntdModule,
+    DistrictSelectComponent
     ]
 })
 export class PubModule { }

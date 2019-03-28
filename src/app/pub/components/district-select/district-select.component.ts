@@ -1,29 +1,27 @@
 import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {Unit} from '../../../entity/Unit';
+import {concat, Observable, of} from 'rxjs';
+import {City} from '../../../entity/City';
+import {DistrictService} from '../../../shared/service/baseapi/district.service';
 
 @Component({
-  selector: 'app-unit-select',
-  templateUrl: './unit-select.component.html',
-  styleUrls: ['./unit-select.component.css'],
+  selector: 'app-district-select',
+  templateUrl: './district-select.component.html',
+  styleUrls: ['./district-select.component.css'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => UnitSelectComponent),
+    useExisting: forwardRef(() => DistrictSelectComponent),
     multi: true
   }]
 })
-export class UnitSelectComponent implements OnInit {
-  @Input()  selectStyle: any = {};
-  // 默認顯示
-  @Input() defaultShow: string;
+export class DistrictSelectComponent implements OnInit {
   // 当选择的值发生变化，激发事件
   @Output() onValueChanged: EventEmitter<any> = new EventEmitter<any>();
   private _currentValue = '0'; // 市州选择 ngModel
   private onValueChangeCallBack: any = {};
 
-  unitArray$: Observable<Array<Unit>> = new Observable<Array<Unit>>();
-  constructor() { }
+  districtArray$: Observable<Array<City>> = new Observable<Array<City>>();
+  constructor(private districtsvr : DistrictService) { }
   get currentValue(): string {
     return this._currentValue;
   }
@@ -48,12 +46,10 @@ export class UnitSelectComponent implements OnInit {
   registerOnTouched(fn: any): void {
   }
   ngOnInit() {
-    const cityList = ( this.store.readSessionStore('arealist') as Array<Area>) ;
-    cityList.splice(0, 0, new Area('0', '0', this.defaultShow, '', '', '', '', 1));
-    this.unitArray$ = of(cityList.filter(o => o.areaAttr === 1)
-    );
+    this.districtArray$ = this.districtsvr.cityDistrictList();
   }
   onValueSelected = () => {
     this.onValueChanged.emit(this._currentValue);
   }
+
 }

@@ -10,7 +10,7 @@ export class SchoolService {
 
   constructor(private httpsvr: HttpService) { }
 
-  schoolList = (queryparam: any): Observable<Array<School>> => {
+  schoolList = (queryparam: any): Observable<{list: Array<School>, total: number}> => {
          return this.httpsvr.onHttpGet('/api/corp/basemsg/school/schoolList', queryparam);
   }
 

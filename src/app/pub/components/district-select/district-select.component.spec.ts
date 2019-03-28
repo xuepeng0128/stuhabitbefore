@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BlankSelectComponent } from './blank-select.component';
+import { DistrictSelectComponent } from './district-select.component';
 
-describe('BlankSelectComponent', () => {
-  let component: BlankSelectComponent;
-  let fixture: ComponentFixture<BlankSelectComponent>;
+describe('DistrictSelectComponent', () => {
+  let component: DistrictSelectComponent;
+  let fixture: ComponentFixture<DistrictSelectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BlankSelectComponent ]
+      declarations: [ DistrictSelectComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BlankSelectComponent);
+    fixture = TestBed.createComponent(DistrictSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

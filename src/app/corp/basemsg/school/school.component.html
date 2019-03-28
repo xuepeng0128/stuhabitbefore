@@ -1,26 +1,26 @@
-<nz-spin [nzSize]="'large'" [nzSpinning]='adsendsvr.loading'>
+
   <div nz-row>
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label [nzSpan]="6">广告编号</nz-form-label>
+        <nz-form-label [nzSpan]="6">学校编号</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input [(ngModel)]="queryParams.advertId">
+          <input nz-input [(ngModel)]="queryParams.schoolId">
         </nz-form-control>
       </nz-form-item>
     </div>
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label [nzSpan]="6">广告名称</nz-form-label>
+        <nz-form-label [nzSpan]="6">学校名称</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input [(ngModel)]="queryParams.advertName">
+          <input nz-input [(ngModel)]="queryParams.schoolName">
         </nz-form-control>
       </nz-form-item>
     </div>
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label [nzSpan]="6">行业</nz-form-label>
+        <nz-form-label [nzSpan]="6">地区</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <app-trade-select [defaultShow]="'--请选择--'" [(ngModel)]="queryParams.tradeId"></app-trade-select>
+          <app-district-select [(ngModel)]="queryParams.tradeId"></app-district-select>
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -28,57 +28,27 @@
   <div nz-row>
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label [nzSpan]="6">公司名称</nz-form-label>
+        <nz-form-label [nzSpan]="6">地址</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input [nzSize]="'default'" [(ngModel)]="queryParams.adCorpName" [ngModelOptions]="{standalone: true}">
+          <input nz-input [nzSize]="'default'" [(ngModel)]="queryParams.address" [ngModelOptions]="{standalone: true}">
         </nz-form-control>
       </nz-form-item>
     </div>
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label [nzSpan]="6">广告状态</nz-form-label>
+        <nz-form-label [nzSpan]="6">业务员</nz-form-label>
         <nz-form-control [nzSpan]="15" >
-          <nz-select  [nzSize]="'default'"  [(ngModel)]="queryParams.nowState">
-            <nz-option  [nzLabel]="'--全部--'" [nzValue]="0"></nz-option>
-            <nz-option  [nzLabel]="'待下发'" [nzValue]="6"></nz-option>
-            <nz-option  [nzLabel]="'已下发'" [nzValue]="7"></nz-option>
-            <nz-option  [nzLabel]="'替换'" [nzValue]="8"></nz-option>
-            <nz-option  [nzLabel]="'被替换'" [nzValue]="9"></nz-option>
-            <nz-option  [nzLabel]="'自动下刊'" [nzValue]="10"></nz-option>
-            <nz-option  [nzLabel]="'手动下刊'" [nzValue]="11"></nz-option>
-          </nz-select>
+
         </nz-form-control>
       </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="8">
-      <nz-form-item>
-        <nz-form-label [nzSpan]="6">品牌</nz-form-label>
-        <nz-form-control [nzSpan]="15">
-          <app-blank-select [defaultShow]="'--全部--'" [(ngModel)]="queryParams.blankId"></app-blank-select>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
+
   </div>
-  <div nz-row>
-    <div nz-col [nzSpan]="8">
-      <nz-form-item>
-        <nz-form-label [nzSpan]="6">审核日期</nz-form-label>
-        <nz-form-control [nzSpan]="7">
-          <nz-date-picker [(ngModel)]="queryParams.TUCheckTime" [nzFormat]="dateFormat" [nzDisabledDate]="disabledStartDate"></nz-date-picker>
-        </nz-form-control>
-        <nz-form-control [nzSpan]="1" class="text-center">
-          --
-        </nz-form-control>
-        <nz-form-control [nzSpan]="7">
-          <nz-date-picker [(ngModel)]="queryParams.endTUCheckTime" [nzFormat]="dateFormat" [nzDisabledDate]="disabledEndDate"></nz-date-picker>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
+
   <div class="m-t-sm text-center" nz-row>
     <div nz-col [nzSpan]="24" class="text-center">
       <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onQuery()">查询</a>
-      <a [href]="excelDownLoadUrl" class="ant-btn ant-btn-primary m-l-xs" download="广告分发管理.xls" *ngIf="user.userId ==='admin' || user.ifGroupManager||power.excel"    [hidden]="!isExcelVilible">excel导出</a>
+      <a class="ant-btn ant-btn-primary m-l-xs" download="学校资源.xls" *ngIf="user.isSupperAdmin "  >excel导出</a>
     </div>
   </div>
   <div class="m-t-sm" nz-row>
@@ -88,11 +58,11 @@
         nzBordered
         nzShowSizeChanger
         [nzFrontPagination]="false"
-        [nzData]="adSendList$ | async"
-        [nzTotal]="total$ |async"
+        [nzData]="(schoolList$ | async).list"
+        [nzTotal]="total"
         [(nzPageIndex)]="queryParams.pageNo"
         [(nzPageSize)]="queryParams.pageSize"
-        (nzPageIndexChange)="onPageIndexChange()"
+        (nzPageIndexChange)="onPageChange($event)"
       >
         <thead >
         <tr>
@@ -154,7 +124,7 @@
       </nz-table>
     </div>
   </div>
-</nz-spin>
+
 
 <!-- 修改策略-->
 <app-policy-set-up [AdvertPolicyOrder$]="AdvertPolicyOrder$" (onSavedPolicy)="onSavePolicy($event)"></app-policy-set-up>
