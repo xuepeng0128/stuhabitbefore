@@ -17,17 +17,17 @@ import {DistrictService} from '../../../shared/service/baseapi/district.service'
 export class DistrictSelectComponent implements OnInit {
   // 当选择的值发生变化，激发事件
   @Output() onValueChanged: EventEmitter<any> = new EventEmitter<any>();
-  private _currentValue = '0'; // 市州选择 ngModel
+  private _CURRENTVALUE = '0'; // 市州选择 ngModel
   private onValueChangeCallBack: any = {};
 
   districtArray$: Observable<Array<City>> = new Observable<Array<City>>();
   constructor(private districtsvr : DistrictService) { }
   get currentValue(): string {
-    return this._currentValue;
+    return this._CURRENTVALUE;
   }
 
   set currentValue(value: string) {
-    this._currentValue = value;
+    this._CURRENTVALUE = value;
     this.onValueChangeCallBack(value);
   }
 
@@ -35,7 +35,7 @@ export class DistrictSelectComponent implements OnInit {
 
   writeValue(obj: any): void {
     if (obj) {
-      this._currentValue = obj;
+      this._CURRENTVALUE = obj;
     }
   }
 
@@ -49,7 +49,7 @@ export class DistrictSelectComponent implements OnInit {
     this.districtArray$ = this.districtsvr.cityDistrictList();
   }
   onValueSelected = () => {
-    this.onValueChanged.emit(this._currentValue);
+    this.onValueChanged.emit(this._CURRENTVALUE);
   }
 
 }

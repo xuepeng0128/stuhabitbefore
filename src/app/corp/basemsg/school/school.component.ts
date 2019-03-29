@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {School} from '../../../entity/School';
 import {SchoolService} from '../../../shared/service/basemsg/school.service';
 import {UserService} from '../../../shared/user.service';
-import {map} from 'rxjs/operators';
+import {flatMap, map} from 'rxjs/operators';
+import {NzModalService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-school',
@@ -12,6 +13,7 @@ import {map} from 'rxjs/operators';
 })
 export class SchoolComponent implements OnInit {
   user = this.usersvr.getUserStorage();
+  schoolWinOrder$: Subject<{nowState: string , school: School}> = new Subject<{nowState: string , school: School}>() ;
   schoolList$: Observable<Array<School>>;
   total = 0;
   queryParams = {
@@ -24,7 +26,7 @@ export class SchoolComponent implements OnInit {
     pageNo : 1,
     getTotal : '1'
   };
-  constructor(private schoolsvr: SchoolService, private usersvr: UserService) { }
+  constructor(private schoolsvr: SchoolService, private usersvr: UserService, private modalService: NzModalService) { }
 
   ngOnInit() {
   }
@@ -46,6 +48,31 @@ export class SchoolComponent implements OnInit {
     );
   }
 
-
-
+onRegist = () => {
+  this.schoolWinOrder$.next({nowState: 'add', school: null});
+}
+  onEdit = (school: School) => {
+    this.schoolWinOrder$.next({nowState: 'edit', school: School});
+  }
+  onSaved = (school: School) => {
+    this.schoolList$ = this.schoolsvr.schoolList(this.queryParams).pipe(
+      map( re => re.list)
+    );
+  }
+  onDelete = (school: School) => {
+    this.modalService.confirm({
+      nzTitle: '<i>提示</i>',
+      nzContent: '<b>确定删除该数据吗?</b>',
+      nzOnOk: () => {
+       this.schoolList$ =  this.schoolsvr.deleteSchool(school).pipe(
+          flatMap(re => this.schoolsvr.schoolList(this.queryParams))
+        ).pipe(
+         map( re => {
+           this.total = re.total;
+           return re.list ;
+         })
+       );
+      }
+    });
+  }
 }

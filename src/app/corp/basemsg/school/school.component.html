@@ -48,6 +48,7 @@
   <div class="m-t-sm text-center" nz-row>
     <div nz-col [nzSpan]="24" class="text-center">
       <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onQuery()">查询</a>
+      <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onRegist()">新注册</a>
       <a class="ant-btn ant-btn-primary m-l-xs" download="学校资源.xls" *ngIf="user.isSupperAdmin "  >excel导出</a>
     </div>
   </div>
@@ -67,57 +68,31 @@
         <thead >
         <tr>
           <th>序号</th>
-          <th>广告编号</th>
-          <th>广告名称</th>
-          <th>格式</th>
-          <th>时长</th>
-          <th>大小</th>
-          <th>投放类别</th>
-          <th>播放形式</th>
-          <th>播放策略</th>
-          <th>屏幕模式</th>
-          <th>位置</th>
-          <th>发布起始日期</th>
-          <th>发布结束日期</th>
-          <th>状态</th>
+          <th>学校编号</th>
+          <th>学校名称</th>
+          <th>市</th>
+          <th>区</th>
+          <th>地址</th>
+          <th>业务员</th>
+          <th>注册时间</th>
           <th>操作</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let data of ajaxTable.data ;let no=index">
           <td>{{no+1}}</td>
-          <td>{{data.advertId}}</td>
-          <td>{{data.advertName}}</td>
-          <td>{{data.fileName===null || data.fileName===''?'':data.fileName.split('.')[data.fileName.split('.').length-1]}}</td>
-          <td>{{data.duration}}</td>
-          <td>{{data.fileSize | cutSizePipe:2}}</td>
-          <td>{{data.putInKind==1 ? '购买' :(data.putInKind ==2?'赠送':'')}}</td>
-          <td>{{data.playAlone==1 ? '轮播' :(data.playAlone ==2?'独播':'')}}</td>
-          <td>{{data.policyName}}</td>
-          <td>{{data.screen}}</td>
-          <td>{{data.screenPosition === 'up'?'上屏':(data.screenPosition === 'mid'?'中屏':(data.screenPosition === 'down'?'下屏':''))}}</td>
-          <td>{{data.playDays===''||data.playDays===null?'':data.playDays.split(',')[0]}}</td>
-          <td>{{data.playDays===''||data.playDays===null?'':data.playDays.split(',')[data.playDays.split(',').length-1]}}</td>
-          <td >{{data.nowState === 1 ? '待审核':(
-            data.nowState === 2 ? '审核中':(
-            data.nowState === 3 ? '审核通过':(
-            data.nowState === 4 ? '审核不通过':(
-            data.nowState === 5 ? '设置策略' :(
-            data.nowState === 6 ? '待下发' :(
-            data.nowState === 7 ? '已下发':(
-            data.nowState === 8 ? '替换':(
-            data.nowState === 9 ? '被替换' :(
-            data.nowState === 10 ? '自动下刊' :(
-            data.nowState === 11 ? '手动下刊':''
-            ))))))))))}}</td>
+          <td>{{data.schoolId}}</td>
+          <td>{{data.schoolName}}</td>
+          <td>{{data.district?.city.cityName}}</td>
+          <td>{{data.district?.districtName}}</td>
+          <td>{{data.address | cutSizePipe:18}}</td>
+          <td>{{data.saleMan.employeeName}}</td>
+          <td>{{data.regTime | date: 'yyyy-MM-dd' }}</td>
+
           <td>
-            <a href="javaScript:;"  (click)="detailShow(data)">详情</a>
-            <nz-divider nzType="vertical" *ngIf="(user.userId ==='admin' || user.ifGroupManager||power.edit) && data.nowState<=6"></nz-divider>
-            <a href="javaScript:;" *ngIf="(user.userId ==='admin' || user.ifGroupManager||power.edit) && data.nowState<=6" (click)="onEditAdvertPolicy(data)">修改策略</a>
-            <nz-divider nzType="vertical" *ngIf="(user.userId ==='admin' || user.ifGroupManager||power.replace) && data.nowState>6"></nz-divider>
-            <a href="javaScript:;" *ngIf="(user.userId ==='admin' || user.ifGroupManager||power.replace) && data.nowState>6" (click)="replaceAdvertModalShow(data)">替换</a>
+            <a href="javaScript:;" *ngIf="user.isSupperAdmin " (click)="onEdit(data)">修改</a>
             <nz-divider nzType="vertical"></nz-divider>
-            <a href="javaScript:;" *ngIf="user.userId ==='admin' || user.ifGroupManager||power.browse"  (click)="onEditHis(data)">修改历史</a>
+            <a href="javaScript:;" *ngIf="user.isSupperAdmin" (click)="onDelete(data)">删除</a>
           </td>
         </tr>
         </tbody>
@@ -125,145 +100,5 @@
     </div>
   </div>
 
+<app-win-school [schoolWinOrder$]="schoolWinOrder$" (onSchoolSaved)="onSaved($event)"></app-win-school>
 
-<!-- 修改策略-->
-<app-policy-set-up [AdvertPolicyOrder$]="AdvertPolicyOrder$" (onSavedPolicy)="onSavePolicy($event)"></app-policy-set-up>
-<!--修改-->
-<nz-modal [(nzVisible)]="isModalShow"
-          nzTitle="提交下发"
-          (nzOnCancel)="isModalShow=false"
-          (nzOnOk)="isModalShow=false"
-          [nzWidth]="240"
->
-  <form nz-form>
-    <div nz-row>
-      <div nz-col [nzSpan]="24" class="text-center">
-        确定要修改吗？
-      </div>
-    </div>
-  </form>
-</nz-modal>
-<!--广告详情-->
-<nz-modal [(nzVisible)]="isModalAdvert"
-          nzTitle="详情"
-          [nzWidth]="900"
-          (nzOnOk)="isModalAdvert=false"
-          (nzOnCancel)="isModalAdvert=false"
->
-  <div nz-row>
-    <div nz-col [nzSpan]="24">
-      <nz-tabset [nzType]="'card'" [nzSelectedIndex]="1">
-        <nz-tab [nzTitle]="'广告详情'">
-          <div nz-row>
-            <app-advert-detail [currentAdvert]="currentAdvert"></app-advert-detail>
-          </div>
-        </nz-tab>
-        <nz-tab [nzTitle]="'分发详情'">
-          <div nz-row>
-            <div nz-col [nzSpan]="24">
-              <label><h2 style="text-align: center">{{currentAdvert.advertId+'\t'+currentAdvert.advertName}}</h2></label>
-            </div>
-            <app-advert-putin-details [advertId]="currentAdvert.advertId"></app-advert-putin-details>
-          </div>
-        </nz-tab>
-
-      </nz-tabset>
-    </div>
-  </div>
-</nz-modal>
-<!--广告修改历史-->
-<nz-modal [(nzVisible)]="isShowHistory"
-          nzTitle="修改历史信息"
-          (nzOnCancel)="isShowHistory=false"
-          (nzOnOk)=" isShowHistory=false"
-          [nzWidth]="1000"
->
-  <form nz-form>
-    <div nz-row>
-      <div nz-col [nzSpan]="24">
-        <nz-table
-          #repeatTableHistory
-          nzBordered
-          nzShowSizeChanger
-          [nzFrontPagination]="false"
-          [nzData]="history$ | async"
-          [nzHideOnSinglePage]="true"
-          [nzScroll]="{ y: '240px' }"
-        >
-          <thead>
-          <tr>
-            <th nzWidth="10%">序号</th>
-            <th nzWidth="20%">修改时间</th>
-            <th>修改账号</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let data of repeatTableHistory.data; let no=index;">
-            <td align="center">{{no+1}}</td>
-            <td align="center">{{data.actionTime}}</td>
-            <td align="center">{{data.userName}}</td>
-          </tr>
-          </tbody>
-        </nz-table>
-      </div>
-    </div>
-  </form>
-</nz-modal>
-<!--广告替换-->
-<nz-modal [(nzVisible)]="isShowReplace"
-          nzTitle="广告替换"
-          (nzOnCancel)="isShowReplace=false"
-          (nzOnOk)="isReplacing? '':replaceAdvert()"
-          [nzWidth]="1000"
->
-  <form nz-form>
-    <div nz-row>
-      <div nz-col [nzSpan]="12" class="text-center">
-        <div nz-col [nzSpan]="20" class="m-t-sm">
-          <a href="javaScript:;" class="ant-btn ant-btn-primary m-l-xs" (click)="replaceDeviceChoose()">选择替换的设备</a>
-        </div>
-        <div nz-col [nzSpan]="20" class="m-t-sm">
-          <nz-table
-            #replacedDeviceAjaxTable
-            nzBordered
-            nzShowSizeChanger
-            [nzFrontPagination]="false"
-            [nzData]="replacedDeviceList"
-            [nzShowPagination]="false"
-            [nzScroll]="{y:'600px'}"
-          >
-            <thead >
-            <tr>
-              <th>设备编号</th>
-              <th>场所名称</th>
-              <th>场所地址</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let data of replacedDeviceAjaxTable.data;">
-              <td>{{data.deviceId}}</td>
-              <td>{{data.enterpriseName}}</td>
-              <td>{{data.address}}</td>
-            </tr>
-            </tbody>
-          </nz-table>
-        </div>
-      </div>
-      <div nz-col [nzSpan]="12">
-        <div nz-row>
-          <div nz-col [nzSpan]="screen.choosed?16:0" style="padding-right:1%;" *ngFor ="let screen of advertScreen.screens">
-            <nz-card class="m-t-xs" [nzTitle]="screen.screenName">
-              <div nz-card-grid *ngFor="let screencut of screen.cutScreenForm" (click)="screencut.advertId!==''?showAdvertList(screencut.advertId,screencut.screenCutId):''"
-                   [ngStyle]="policysvr.onCalCutScreenStyle(screencut.screenCutId)" >
-                <div>{{screencut.screenCutName}}({{screencut.screenSize}})</div>
-                <nz-tag *ngIf="screencut.advertId !==''" [nzMode]="'default'" [nzColor]="'#87d068'">
-                  {{screencut.advertId}}
-                </nz-tag>
-              </div>
-            </nz-card>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</nz-modal>

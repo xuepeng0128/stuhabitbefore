@@ -13,6 +13,9 @@ export class EmployeeService {
   employeeList = (queryparams: any): Observable<Array<Employee>> => {
      return this.httpsvr.onHttpGet('/api/corp/system/employee/employeeList', queryparams);
   }
+  singleEmployee = (paperId: string): Observable<Employee> => {
+    return this.httpsvr.onHttpGet('/api/corp/system/employee/singleEmployee', {paperId});
+  }
   insertEmployee = (employee: Employee): Observable<Employee> => {
      return this.httpsvr.onHttpPost('/api/corp/system/employee/insertEmployee', employee);
   }

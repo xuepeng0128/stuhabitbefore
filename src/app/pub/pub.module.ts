@@ -5,10 +5,13 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import { CitySelectComponent } from './components/city-select/city-select.component';
 import { DistrictSelectComponent } from './components/district-select/district-select.component';
+import {CutSizePipe} from './pipe/cutSize.pipe';
+import { WinSchoolComponent } from './components/win-school/win-school.component';
+import { EmployeeSelectComponent } from './components/employee-select/employee-select.component';
 
 
 @NgModule({
-  declarations: [CitySelectComponent, DistrictSelectComponent],
+  declarations: [CitySelectComponent, DistrictSelectComponent, WinSchoolComponent, EmployeeSelectComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,7 +25,9 @@ import { DistrictSelectComponent } from './components/district-select/district-s
     ReactiveFormsModule,
     HttpClientModule,
     NgZorroAntdModule,
-    DistrictSelectComponent
+    DistrictSelectComponent,
+    EmployeeSelectComponent,
+    CutSizePipe,
     ]
 })
 export class PubModule { }

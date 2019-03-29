@@ -1,25 +1,25 @@
 import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
+import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EmployeeService} from '../../../shared/service/system/employee.service';
 import {Observable} from 'rxjs';
 import {Employee} from '../../../entity/Employee';
-import {EmployeeService} from '../../../shared/service/system/employee.service';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
-import {City} from '../../../entity/City';
 
 @Component({
-  selector: 'app-city-select',
-  templateUrl: './city-select.component.html',
-  styleUrls: ['./city-select.component.css'],
+  selector: 'app-employee-select',
+  templateUrl: './employee-select.component.html',
+  styleUrls: ['./employee-select.component.css'],
   providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => CitySelectComponent),
-    multi: true
-  }]
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => EmployeeSelectComponent),
+  multi: true
+}]
 })
-export class CitySelectComponent implements OnInit {
-// 默認顯示
+export class EmployeeSelectComponent implements OnInit {
+  // 默認顯示
+  @Input() defaultShow: string;
   // 当选择的值发生变化，激发事件
   @Output() onValueChanged: EventEmitter<any> = new EventEmitter<any>();
-  cityArray$: Observable<Array<City>>;
+  employeeArray$: Observable<Array<Employee>>;
   private _CURRENTVALUE = '0'; // 市州选择 ngModel
   private onValueChangeCallBack: any = {};
 
@@ -46,13 +46,12 @@ export class CitySelectComponent implements OnInit {
 
   registerOnTouched(fn: any): void {
   }
-  constructor() { }
+  constructor(private employeesvr: EmployeeService) { }
 
   ngOnInit() {
-    this.cityArray$ = null;
+     this.employeeArray$ = this.employeesvr.employeeList({});
   }
   onValueSelected = () => {
     this.onValueChanged.emit(this._CURRENTVALUE);
   }
-
 }
