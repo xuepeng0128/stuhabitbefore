@@ -11,7 +11,8 @@ import { EmployeeSelectComponent } from './components/employee-select/employee-s
 
 
 @NgModule({
-  declarations: [CitySelectComponent, DistrictSelectComponent, WinSchoolComponent, EmployeeSelectComponent],
+  declarations: [CitySelectComponent, DistrictSelectComponent, WinSchoolComponent,
+    EmployeeSelectComponent, CutSizePipe],
   imports: [
     CommonModule,
     FormsModule,

@@ -52,7 +52,7 @@ onRegist = () => {
   this.schoolWinOrder$.next({nowState: 'add', school: null});
 }
   onEdit = (school: School) => {
-    this.schoolWinOrder$.next({nowState: 'edit', school: School});
+    this.schoolWinOrder$.next({nowState: 'edit', school});
   }
   onSaved = (school: School) => {
     this.schoolList$ = this.schoolsvr.schoolList(this.queryParams).pipe(

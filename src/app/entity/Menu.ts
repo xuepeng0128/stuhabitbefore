@@ -7,7 +7,8 @@ export class Menu {
   kind: string ; // 1.公司 ，2.学校，3.机构
 
 
-  constructor(options: {menuId: string, menuName: string, subMenu: Array<Menu>, url: string, powers: Array<any>, kind: string}= {}) {
+  constructor(options: {menuId?: string, menuName?: string, subMenu?: Array<Menu>, url?: string, powers?: Array<any>,
+                        kind?: string}= {}) {
     this.menuId = options.menuId;
     this.menuName = options.menuName;
     this.subMenu = options.subMenu;

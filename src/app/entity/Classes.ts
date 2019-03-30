@@ -9,7 +9,7 @@ export class Classes {
   students: Array<Student>; // 班级学生
 
 
-  constructor(options: {id: string, grade: number, classes: number, school: School, students: Array<Student>}= {}) {
+  constructor(options: {id?: string, grade?: number, classes?: number, school?: School, students?: Array<Student>}= {}) {
     this.id = options.id || '';
     this.grade = options.grade;
     this.classes = options.classes;

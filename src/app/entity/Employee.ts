@@ -9,7 +9,7 @@ export class Employee {
 
 
   constructor(options: {paperId?: string, employeeName?: string, tel?: string, duty?: string,
-                        enterDate: Date, onDutyState?: number, leaveDate?: Date} = {}) {
+                        enterDate?: Date, onDutyState?: number, leaveDate?: Date} = {}) {
     this.paperId = options.paperId || '';
     this.employeeName = options.employeeName || '';
     this.tel = options.tel || '';
