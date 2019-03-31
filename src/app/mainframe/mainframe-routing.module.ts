@@ -10,9 +10,11 @@ const routes: Routes = [
       path: 'frame', component: FrameComponent,
       canActivate: [AuthGuardService],
       children: [
-        { path : '' , redirectTo : 'homeComponent', pathMatch: 'full'},
-        { path: 'homeComponent', component: HomeComponent }, // 首页
-       // { path: 'dictionary', loadChildren: './../dictionary/dictionary.module#DictionaryModule' }, //
+        { path : '' , redirectTo : 'home', pathMatch: 'full'},
+        { path: 'home', component: HomeComponent }, // 首页
+        { path: 'corpbasemsg', loadChildren: './../corp/basemsg/basemsg.module#BasemsgModule' }, //
+        { path: 'corpdic', loadChildren: './../corp/dic/dic.module#DicModule' }, //
+        { path: 'corpsystem', loadChildren: './../corp/system/system.module#SystemModule' }, //
       ]
   }
 

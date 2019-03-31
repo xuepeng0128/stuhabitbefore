@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-circle',
@@ -7,6 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CircleComponent implements OnInit {
 
+  queryParams ={
+    schoolName : '',
+    circleName :'',
+    pageSize : 20,
+    pageNo :1,
+    getTotal : '1' 
+  }
+  circleList$ : Observable<Array<Circle>>
   constructor() { }
 
   ngOnInit() {

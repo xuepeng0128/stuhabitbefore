@@ -26,6 +26,7 @@ import { EmployeeSelectComponent } from './components/employee-select/employee-s
     ReactiveFormsModule,
     HttpClientModule,
     NgZorroAntdModule,
+    WinSchoolComponent,
     DistrictSelectComponent,
     EmployeeSelectComponent,
     CutSizePipe,
