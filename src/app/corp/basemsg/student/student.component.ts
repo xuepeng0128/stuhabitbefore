@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Student} from '../../../entity/Student';
 import {StudentService} from '../../../shared/service/basemsg/student.service';
 import {map} from 'rxjs/operators';
+import {CommonService} from '../../../shared/common.service';
 
 @Component({
   selector: 'app-student',
@@ -22,7 +23,7 @@ export class StudentComponent implements OnInit {
     pageNo : 1,
     getTotal : '1'
   };
-  constructor(private studentsvr: StudentService) { }
+  constructor(private studentsvr: StudentService, public  commonsvr: CommonService) { }
 
   ngOnInit() {
   }
@@ -47,8 +48,6 @@ export class StudentComponent implements OnInit {
       })
     );
   }
-
-
 
 
 
