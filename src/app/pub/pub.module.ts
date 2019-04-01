@@ -8,11 +8,12 @@ import { DistrictSelectComponent } from './components/district-select/district-s
 import {CutSizePipe} from './pipe/cutSize.pipe';
 import { WinSchoolComponent } from './components/win-school/win-school.component';
 import { EmployeeSelectComponent } from './components/employee-select/employee-select.component';
+import { WinEmployeeComponent } from './components/win-employee/win-employee.component';
 
 
 @NgModule({
   declarations: [CitySelectComponent, DistrictSelectComponent, WinSchoolComponent,
-    EmployeeSelectComponent, CutSizePipe],
+    EmployeeSelectComponent, CutSizePipe, WinEmployeeComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -27,6 +28,7 @@ import { EmployeeSelectComponent } from './components/employee-select/employee-s
     HttpClientModule,
     NgZorroAntdModule,
     WinSchoolComponent,
+    WinEmployeeComponent,
     DistrictSelectComponent,
     EmployeeSelectComponent,
     CutSizePipe,
