@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { DicRoutingModule } from './dic-routing.module';
 import { HabitTemplateComponent } from './habit-template/habit-template.component';
 import { TeacherDutyComponent } from './teacher-duty/teacher-duty.component';
+import { SubjectComponent } from './subject/subject.component';
 
 @NgModule({
-  declarations: [HabitTemplateComponent, TeacherDutyComponent],
+  declarations: [HabitTemplateComponent, TeacherDutyComponent, SubjectComponent],
   imports: [
     CommonModule,
     DicRoutingModule
