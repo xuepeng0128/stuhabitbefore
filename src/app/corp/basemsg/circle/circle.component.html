@@ -2,33 +2,62 @@
 <div nz-row>
   <div nz-col [nzSpan]="8">
     <nz-form-item>
+      <nz-form-label [nzSpan]="6">学校类别</nz-form-label>
+      <nz-form-control [nzSpan]="15">
+        <nz-select [(ngModel)]="currentValue" class="form-input fullWidth">
+          <nz-option [nzValue]="'0'" nzLabel="全部"></nz-option>
+          <nz-option [nzValue]="'1'" nzLabel="全日制学校"></nz-option>
+          <nz-option [nzValue]="'2'" nzLabel="培训机构"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div nz-col [nzSpan]="8">
+    <nz-form-item>
       <nz-form-label [nzSpan]="6">学校</nz-form-label>
       <nz-form-control [nzSpan]="15">
-        <input nz-input [(ngModel)]="queryParams.paperId">
+        <input nz-input [(ngModel)]="queryParams.schoolName">
       </nz-form-control>
     </nz-form-item>
   </div>
   <div nz-col [nzSpan]="8">
     <nz-form-item>
-      <nz-form-label [nzSpan]="6">习惯圈</nz-form-label>
+      <nz-form-label [nzSpan]="6">圈名</nz-form-label>
       <nz-form-control [nzSpan]="15">
-        <input nz-input [(ngModel)]="queryParams.studentName">
+        <input nz-input [(ngModel)]="queryParams.circleName">
       </nz-form-control>
     </nz-form-item>
   </div>
-  <div nz-col [nzSpan]="8">
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">年龄段:</nz-form-label>
-      <nz-form-control [nzSpan]="9">
-        <nz-input-number [(ngModel)]="queryParams.ageBegin" [nzMin]="1" [nzMax]="15" [nzStep]="1"></nz-input-number>
-      </nz-form-control>
-      <nz-form-control [nzSpan]="9">
-        <nz-input-number [(ngModel)]="queryParams.ageEnd" [nzMin]="1" [nzMax]="15" [nzStep]="1"></nz-input-number>
-      </nz-form-control>
-    </nz-form-item>
-  </div>
+
 </div>
 
+<div nz-row>
+  <div nz-col [nzSpan]="8">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">创建时间:</nz-form-label>
+      <nz-form-control [nzSpan]="8">
+        <nz-date-picker [(ngModel)]="queryParams.buildDateBegin" ></nz-date-picker>
+      </nz-form-control>
+      <nz-form-control [nzSpan]="2">
+        --
+      </nz-form-control>
+      <nz-form-control [nzSpan]="8">
+        <nz-date-picker [(ngModel)]="queryParams.buildDateEnd" ></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div nz-col [nzSpan]="8">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">创建人</nz-form-label>
+      <nz-form-control [nzSpan]="15">
+        <input nz-input [(ngModel)]="queryParams.circleName">
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div nz-col [nzSpan]="8">
+
+  </div>
+</div>
 
 <div class="m-t-sm text-center" nz-row>
   <div nz-col [nzSpan]="24" class="text-center">
@@ -71,9 +100,7 @@
         <td>{{data.regTime | date: 'yyyy-MM-dd' }}</td>
 
         <td>
-          <a href="javaScript:;" *ngIf="user.isSupperAdmin " (click)="onEdit(data)">修改</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a href="javaScript:;" *ngIf="user.isSupperAdmin" (click)="onDelete(data)">删除</a>
+          <a href="javaScript:;" *ngIf="user.isSupperAdmin" (click)="onClose(data)">强制关闭</a>
         </td>
       </tr>
       </tbody>

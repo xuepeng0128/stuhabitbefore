@@ -13,9 +13,8 @@ export class Circle {
      teachers : Array<Teacher> ;// 圈内老师
      students : Array<Student>; // 圈内学生
      endDate : Date; // 圈子关闭时间
-    CloseReason : string ; // 关闭原因
-    
-
+     closeReason : string ; // 关闭原因
+     closeMan : string;
 
 
 }
