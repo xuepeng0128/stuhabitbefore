@@ -73,6 +73,7 @@
           <th>市</th>
           <th>区</th>
           <th>地址</th>
+          <th>类型</th>
           <th>业务员</th>
           <th>注册时间</th>
           <th>操作</th>
@@ -86,6 +87,7 @@
           <td>{{data.district?.city.cityName}}</td>
           <td>{{data.district?.districtName}}</td>
           <td>{{data.address | cutSizePipe:18}}</td>
+          <td>{{data.schoolStyle==='1' ? '小学' :'初中'}}</td>
           <td>{{data.saleMan.employeeName}}</td>
           <td>{{data.regTime | date: 'yyyy-MM-dd' }}</td>
 

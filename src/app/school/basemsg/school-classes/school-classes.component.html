@@ -1,3 +1,48 @@
-<p>
-  school-classes works!
-</p>
+
+
+<div class="m-t-sm text-center" nz-row>
+  <div nz-col [nzSpan]="24" class="text-center">
+    <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onRegist()">添加</a>
+  </div>
+</div>
+<div class="m-t-sm" nz-row>
+  <div nz-col [nzSpan]="24">
+    <nz-table
+      #ajaxTable
+      nzBordered
+      nzShowSizeChanger
+      [nzFrontPagination]="false"
+      [nzData]="schoolList$ | async"
+    >
+      <thead >
+      <tr>
+        <th>序号</th>
+        <th>学籍</th>
+        <th>年级</th>
+        <th>班级</th>
+        <th>班主任</th>
+        <th>学生数</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of ajaxTable.data ;let no=index">
+        <td>{{no+1}}</td>
+        <td>{{data.grade}}</td>
+        <td>{{commonsvr.calculateGradeMiddleSchool(data.grade)}}</td>
+        <td>{{data.classes}}</td>
+        <td>{{data.headmaster.teacherName}}</td>
+        <td>{{data.students.length}}</td>
+        <td>
+          <a href="javaScript:;" *ngIf="user.isSupperAdmin " (click)="onEdit(data)">修改</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a href="javaScript:;" *ngIf="user.isSupperAdmin" (click)="onDelete(data)">删除</a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+
+<app-win-school [schoolWinOrder$]="schoolWinOrder$" (onSchoolSaved)="onSaved($event)"></app-win-school>
+

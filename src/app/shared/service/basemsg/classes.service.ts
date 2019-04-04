@@ -14,6 +14,10 @@ export class ClassesService {
      return this.httpsvr.onHttpGet('/api/corp/basemsg/classes/classesList', queryparams);
   }
 
+  schoolClassesList = (queryparams: any): Observable<Array<Classes>> => {
+    return this.httpsvr.onHttpGet('/api/school/basemsg/classes/classesList', queryparams);
+  }
+
 
   insertClasses = (classes: Classes): Observable<Classes> => {
     return this.httpsvr.onHttpPost('/api/school/basemsg/classes/insertClasses', classes);

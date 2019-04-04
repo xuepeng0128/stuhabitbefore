@@ -46,4 +46,41 @@ export class CommonService {
     }
   }
 
+
+  // 计算小学
+  calculateGradePrimarySchool = (gradeyear: number): string => {
+      const nowDate = new Date();
+      let nj = 0;
+      if (nowDate.getMonth() + 1 >= 9) {
+        nj = nowDate.getFullYear() - gradeyear + 1;
+      } else {
+         nj = nowDate.getFullYear() - gradeyear;
+      }
+
+      if (nj > 6) {
+         return '毕业';
+      } else {
+        return nj.toString();
+      }
+  }
+
+  // 计算初中
+  calculateGradeMiddleSchool = (gradeyear: number): string => {
+    const nowDate = new Date();
+    let nj = 0;
+    if (nowDate.getMonth() + 1 >= 9) {
+      nj = nowDate.getFullYear() - gradeyear + 1;
+    } else {
+      nj = nowDate.getFullYear() - gradeyear;
+    }
+
+    if (nj > 3) {
+      return '毕业';
+    } else {
+      return nj.toString();
+    }
+  }
+
+
+
 }
