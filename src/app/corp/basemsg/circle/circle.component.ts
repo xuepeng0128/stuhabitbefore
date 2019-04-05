@@ -21,7 +21,7 @@ export class CircleComponent implements OnInit {
     circleName : '',
     buildDateBegin : '',
     buildDateEnd : '',
-    queryPaperId : this.user.isSupperAdmin ?  '' : (this.user.employee.duty.isMaster ?  '' : this.user.employee.paperId) ,
+    queryPaperId : this.user.supperAdmin ?  '' : (this.user.employee.duty.master ?  '' : this.user.employee.paperId) ,
     pageSize : 20,
     pageNo : 1,
     getTotal : '1'

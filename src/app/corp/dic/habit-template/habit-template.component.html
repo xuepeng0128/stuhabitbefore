@@ -13,7 +13,7 @@
       nzBordered
       nzShowSizeChanger
       [nzFrontPagination]="false"
-      [nzData]="habitArray$ | async"
+      [nzData]="habitArray"
     >
       <thead >
       <tr>
@@ -42,14 +42,14 @@
         <td>{{data.habitId}}</td>
         <td>{{data.habitName}}</td>
         <td>{{data.memo}}</td>
-        <td><video [src]="data.vedioUrl"></video> </td>
-        <td><audio [src]="data.audioUrl"></audio> </td>
-        <td><img [src]="data.picUrl"></td>
+        <td><video [src]="data.vedioUrl"  class="mediarect"></video> </td>
+        <td><audio [src]="data.audioUrl" class="mediarect"></audio> </td>
+        <td><img [src]="data.picUrl" class="mediarect"></td>
 
         <td>
-          <a href="javaScript:;" *ngIf="user.isSupperAdmin " (click)="onEdit(data)">修改</a>
+          <a href="javaScript:;" *ngIf="user.supperAdmin " (click)="onEdit(data)">修改</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a href="javaScript:;" *ngIf="user.isSupperAdmin" (click)="onDelete(data)">删除</a>
+          <a href="javaScript:;" *ngIf="user.supperAdmin" (click)="onDelete(data)">删除</a>
         </td>
       </tr>
       </tbody>

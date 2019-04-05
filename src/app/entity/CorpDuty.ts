@@ -1,11 +1,11 @@
 export class CorpDuty {
     corpDutyId: string;
     corpDutyName: string;
-    isMaster: boolean;
+    master: boolean;
 
-  constructor(options: {corpDutyId?: string, corpDutyName?: string, isMaster?: boolean}= {}) {
+  constructor(options: {corpDutyId?: string, corpDutyName?: string, master?: boolean}= {}) {
     this.corpDutyId = options.corpDutyId || '' ;
     this.corpDutyName = options.corpDutyName || '';
-    this.isMaster = options.isMaster || false;
+    this.master = options.master || false;
   }
 }

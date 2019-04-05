@@ -12,9 +12,9 @@ import {HabitService} from '../../../shared/service/basemsg/habit.service';
   styleUrls: ['./habit-template.component.css']
 })
 export class HabitTemplateComponent implements OnInit {
-  habitWinOrder$: Subject<{nowState: string , habit: Habit}>= new Subject<{nowState: string , habit: Habit}>() ;
+  habitWinOrder$: Subject<{nowState: string , habit: Habit}> = new Subject<{nowState: string , habit: Habit}>() ;
   user = this.usersvr.getUserStorage();
-  habitArray$: Observable<Array<Habit>> = new Observable<Array<Habit>>();
+  habitArray: Array<Habit> = new Array<Habit>();
 
   queryParams = {
     habitName : '',
@@ -24,10 +24,13 @@ export class HabitTemplateComponent implements OnInit {
               private modalService: NzModalService) { }
 
   ngOnInit() {
+    this.onQuery();
   }
 
   onQuery = () => {
-    this.habitArray$ = this.habitsvr.habitTemplateList(this.queryParams);
+     this.habitsvr.habitTemplateList(this.queryParams).subscribe(
+      re => this.habitArray = re
+    );
   }
 
 
@@ -38,16 +41,18 @@ export class HabitTemplateComponent implements OnInit {
     this.habitWinOrder$.next({nowState: 'edit', habit});
   }
   onSaved = (habit: Habit) => {
-    this.habitArray$ = this.habitsvr.habitTemplateList(this.queryParams);
+    this.habitsvr.habitTemplateList(this.queryParams).subscribe(re =>
+      this.habitArray = re
+    );
   }
   onDelete = (habit: Habit) => {
     this.modalService.confirm({
       nzTitle: '<i>提示</i>',
       nzContent: '<b>确定删除该数据吗?</b>',
       nzOnOk: () => {
-        this.habitArray$ =  this.habitsvr.deleteTemplateHabit(habit).pipe(
+         this.habitsvr.deleteTemplateHabit(habit).pipe(
           flatMap(re => this.habitsvr.habitTemplateList(this.queryParams))
-        );
+        ).subscribe(re => this.habitArray = re );
       }
     });
   }

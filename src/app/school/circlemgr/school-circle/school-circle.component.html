@@ -34,7 +34,7 @@
     <nz-upload nzAction="/backfiles/excelImport" (nzChange)="handleExcelChange($event)">
       <button nz-button><i nz-icon type="upload"></i><span>excel导入</span></button>
     </nz-upload>
-    <a href="javaScript:;" class="ant-btn ant-btn-primary m-l-xs"  *ngIf="user.isSupperAdmin " (click)="onExcelExport()" >excel导出</a>
+    <a href="javaScript:;" class="ant-btn ant-btn-primary m-l-xs"  *ngIf="user.supperAdmin " (click)="onExcelExport()" >excel导出</a>
   </div>
 </div>
 <div class="m-t-sm" nz-row>

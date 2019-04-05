@@ -49,7 +49,7 @@
     <div nz-col [nzSpan]="24" class="text-center">
       <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onQuery()">查询</a>
       <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onRegist()">新注册</a>
-      <a class="ant-btn ant-btn-primary m-l-xs" download="学校资源.xls" *ngIf="user.isSupperAdmin "  >excel导出</a>
+      <a class="ant-btn ant-btn-primary m-l-xs" download="学校资源.xls" *ngIf="user.supperAdmin "  >excel导出</a>
     </div>
   </div>
   <div class="m-t-sm" nz-row>
@@ -92,9 +92,9 @@
           <td>{{data.regTime | date: 'yyyy-MM-dd' }}</td>
 
           <td>
-            <a href="javaScript:;" *ngIf="user.isSupperAdmin " (click)="onEdit(data)">修改</a>
+            <a href="javaScript:;" *ngIf="user.supperAdmin " (click)="onEdit(data)">修改</a>
             <nz-divider nzType="vertical"></nz-divider>
-            <a href="javaScript:;" *ngIf="user.isSupperAdmin" (click)="onDelete(data)">删除</a>
+            <a href="javaScript:;" *ngIf="user.supperAdmin" (click)="onDelete(data)">删除</a>
           </td>
         </tr>
         </tbody>

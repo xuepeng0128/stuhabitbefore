@@ -48,7 +48,7 @@ export class WinHabitComponent implements OnInit {
   handleVideoPreview = (file: ISupUploadfiles) => {
     this.previewVideo = file.url || file.thumbUrl ||  file.base64Data;
     this.previewVideoVisible = true;
-    this.currentHabit.vedioUrl = this.previewVideo;
+    this.currentHabit.videoUrl = this.previewVideo;
   }
 
   handleAudioPreview = (file: ISupUploadfiles) => {
