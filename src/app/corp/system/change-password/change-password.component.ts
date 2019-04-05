@@ -19,7 +19,7 @@ export class ChangePasswordComponent implements OnInit {
   msg: string; // 提示
   user: User = this.usersvr.getUserStorage();
 
-  constructor(private storagesvr: StorageService, private usersvr: UserService, private message: NzMessageService) { }
+  constructor(private usersvr: UserService, private message: NzMessageService) { }
 
   ngOnInit() {
     this.user.passWord = '';

@@ -4,6 +4,8 @@ import {Student} from '../../../entity/Student';
 import {StudentService} from '../../../shared/service/basemsg/student.service';
 import {map} from 'rxjs/operators';
 import {CommonService} from '../../../shared/common.service';
+import {User} from '../../../entity/User';
+import {UserService} from '../../../shared/user.service';
 
 @Component({
   selector: 'app-student',
@@ -11,7 +13,7 @@ import {CommonService} from '../../../shared/common.service';
   styleUrls: ['./student.component.css']
 })
 export class StudentComponent implements OnInit {
-
+  user: User = this.usersvr.getUserStorage();
   studentList$: Observable<Array<Student>> = new Observable<Array<Student>>() ;
   total = 0;
   queryParams = {
@@ -23,7 +25,7 @@ export class StudentComponent implements OnInit {
     pageNo : 1,
     getTotal : '1'
   };
-  constructor(private studentsvr: StudentService, public  commonsvr: CommonService) { }
+  constructor(private studentsvr: StudentService, public  commonsvr: CommonService, private usersvr: UserService) { }
 
   ngOnInit() {
   }

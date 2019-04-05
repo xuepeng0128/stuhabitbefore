@@ -15,7 +15,7 @@ import {flatMap, map} from 'rxjs/operators';
   styleUrls: ['./win-school.component.css']
 })
 export class WinSchoolComponent implements OnInit {
-  @Input() schoolWinOrder$: Subject<{nowState: string , school: School}> ;
+  @Input() schoolWinOrder$: Subject<{nowState: string , school: School}> = new Subject<{nowState: string , school: School}>() ;
   @Output() onSchoolSaved: EventEmitter<School> = new EventEmitter<School>();
   currentSchool: School = new School({});
   isSchoolModalShow = false;
@@ -30,6 +30,7 @@ export class WinSchoolComponent implements OnInit {
          } else if (re.nowState === 'edit') {
             this.currentSchool = re.school;
          }
+         this.isSchoolModalShow = true;
     });
   }
 

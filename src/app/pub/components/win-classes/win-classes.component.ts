@@ -33,6 +33,7 @@ export class WinClassesComponent implements OnInit {
       } else if (re.nowState === 'edit') {
         this.currentClasses = re.classes;
       }
+      this.isClassesModalShow=true;
     });
   }
 

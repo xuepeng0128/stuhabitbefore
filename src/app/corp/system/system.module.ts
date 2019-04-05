@@ -9,7 +9,8 @@ import { PowerMgrComponent } from './power-mgr/power-mgr.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
 
 @NgModule({
-  declarations: [EmployeeMgrComponent, UserMgrComponent, SchoolAdminMgrComponent, PowerMgrComponent, ChangePasswordComponent, SchoolAdminMgrComponent],
+  declarations: [EmployeeMgrComponent, UserMgrComponent, SchoolAdminMgrComponent,
+    PowerMgrComponent, ChangePasswordComponent, SchoolAdminMgrComponent],
   imports: [
     CommonModule,
     SystemRoutingModule

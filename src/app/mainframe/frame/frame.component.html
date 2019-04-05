@@ -22,11 +22,13 @@
         <nz-breadcrumb-item>{{pareMenuName}}</nz-breadcrumb-item>
         <nz-breadcrumb-item>{{subMenuName}}</nz-breadcrumb-item>
       </nz-breadcrumb>
+      <!--<nz-spin class="tip" [nzSize]="'large'" [nzTip]="'数据交互中...'" [nzDelay]="100" [nzSpinning]="loading">&ndash;&gt;-->
       <nz-content style="background:#fff; padding: 24px;overflow: scroll" [ngStyle]="{'height':clientHeight +'px'}">
-        <nz-spin class="tip" [nzSize]="'large'" [nzTip]="'数据交互中...'" [nzDelay]="100" [nzSpinning]="loading">
+
             <router-outlet></router-outlet>
-        </nz-spin>
+
       </nz-content>
+      <!--</nz-spin>-->
     </nz-layout>
   </nz-layout>
   <nz-footer style="text-align: center;"></nz-footer>

@@ -15,12 +15,13 @@ import { WinClassesComponent } from './components/win-classes/win-classes.compon
 import {YearSelectComponent} from './components/year-select/year-select.component';
 import { TeacherChooseComponent } from './components/teacher-choose/teacher-choose.component';
 import {ArrayTextFilterPipe} from './pipe/array-text-filter.pipe';
+import {WinEmployeeComponent} from './components/win-employee/win-employee.component';
 
 
 
 @NgModule({
   declarations: [CitySelectComponent, DistrictSelectComponent, WinSchoolComponent,
-    EmployeeSelectComponent, CutSizePipe, ArrayTextFilterPipe, WinEmployeeComponent, HabitClassComponent, HabitClassSelectComponent,
+    EmployeeSelectComponent, CutSizePipe, ArrayTextFilterPipe, WinEmployeeComponent,  HabitClassSelectComponent,
     WinHabitComponent, WinClassesComponent, YearSelectComponent, TeacherChooseComponent],
   imports: [
     CommonModule,

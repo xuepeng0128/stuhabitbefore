@@ -3,12 +3,13 @@ import {Observable, Subject} from 'rxjs';
 import {Employee} from '../../../entity/Employee';
 import {EmployeeService} from '../../../shared/service/system/employee.service';
 import {UserService} from '../../../shared/user.service';
-import {NzModalService} from 'ng-zorro-antd';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {flatMap, map, switchMap} from 'rxjs/operators';
 import {User} from '../../../entity/User';
 import {isNullOrUndefined} from 'util';
 import {MSG_SAVE_ERROR} from '../../../shared/SysMessage';
-import {switchTap} from '@angular/router/src/operators/switch_tap';
+import {HabitService} from '../../../shared/service/basemsg/habit.service';
+
 
 @Component({
   selector: 'app-user-mgr',
@@ -26,11 +27,9 @@ export class UserMgrComponent implements OnInit {
   };
   userArray$: Observable<Array<User>> = new Observable<Array<User>>();
   total = 0;
-  constructor(private usersvr: UserService , private modalService: NzModalService) { }
+  constructor(private usersvr: UserService , private modalService: NzModalService, private message: NzMessageService) { }
 
   ngOnInit() {
-
-
 
   }
   onQuery = () => {
@@ -40,13 +39,9 @@ export class UserMgrComponent implements OnInit {
   onRegist = () => {
 
   }
-  onEdit = (employee: Employee) => {
-    this.employeeWinOrder$.next({nowState: 'edit', employee});
-  }
-  onSaved = (employee: Employee) => {
-    this.employeeArray$ = this.employeesvr.employeeList(this.queryParams).pipe(
-      map( re => re.list)
-    );
+
+  onSaved = () => {
+
   }
   onDelete = (ur: User) => {
     this.modalService.confirm({

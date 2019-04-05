@@ -1,55 +1,9 @@
 
-<div nz-row>
-  <div nz-col [nzSpan]="8">
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">学校编号</nz-form-label>
-      <nz-form-control [nzSpan]="15">
-        <input nz-input [(ngModel)]="queryParams.schoolId">
-      </nz-form-control>
-    </nz-form-item>
-  </div>
-  <div nz-col [nzSpan]="8">
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">学校名称</nz-form-label>
-      <nz-form-control [nzSpan]="15">
-        <input nz-input [(ngModel)]="queryParams.schoolName">
-      </nz-form-control>
-    </nz-form-item>
-  </div>
-  <div nz-col [nzSpan]="8">
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">地区</nz-form-label>
-      <nz-form-control [nzSpan]="15">
-        <app-district-select [(ngModel)]="queryParams.tradeId"></app-district-select>
-      </nz-form-control>
-    </nz-form-item>
-  </div>
-</div>
-<div nz-row>
-  <div nz-col [nzSpan]="8">
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">地址</nz-form-label>
-      <nz-form-control [nzSpan]="15">
-        <input nz-input [nzSize]="'default'" [(ngModel)]="queryParams.address" [ngModelOptions]="{standalone: true}">
-      </nz-form-control>
-    </nz-form-item>
-  </div>
-  <div nz-col [nzSpan]="8">
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">业务员</nz-form-label>
-      <nz-form-control [nzSpan]="15" >
-
-      </nz-form-control>
-    </nz-form-item>
-  </div>
-
-</div>
 
 <div class="m-t-sm text-center" nz-row>
   <div nz-col [nzSpan]="24" class="text-center">
     <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onQuery()">查询</a>
-    <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onRegist()">新注册</a>
-    <a class="ant-btn ant-btn-primary m-l-xs" download="学校资源.xls" *ngIf="user.isSupperAdmin "  >excel导出</a>
+    <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onAdd()">添加</a>
   </div>
 </div>
 <div class="m-t-sm" nz-row>
@@ -78,11 +32,12 @@
       <tr *ngFor="let data of ajaxTable.data ;let no=index">
         <td>{{no+1}}</td>
         <td [ngSwitch]="data.habitClass">
-          <b *ngSwitchCase="'1'" > 德</b>
-          <b *ngSwitchCase="'2'" > 智</b>
-          <b *ngSwitchCase="'3'" > 体</b>
-          <b *ngSwitchCase="'4'" > 美</b>
-          <b *ngSwitchCase="'5'" > 劳</b>
+          <b *ngSwitchCase="1" > 德</b>
+          <b *ngSwitchCase="2" > 智</b>
+          <b *ngSwitchCase="3" > 体</b>
+          <b *ngSwitchCase="4" > 美</b>
+          <b *ngSwitchCase="5" > 劳</b>
+          <b *ngSwitchDefault> 劳</b>
         </td>
         <td>{{data.habitId}}</td>
         <td>{{data.habitName}}</td>

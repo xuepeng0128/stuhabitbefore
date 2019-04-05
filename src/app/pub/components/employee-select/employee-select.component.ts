@@ -3,6 +3,7 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EmployeeService} from '../../../shared/service/system/employee.service';
 import {Observable} from 'rxjs';
 import {Employee} from '../../../entity/Employee';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-employee-select',
@@ -49,7 +50,9 @@ export class EmployeeSelectComponent implements OnInit {
   constructor(private employeesvr: EmployeeService) { }
 
   ngOnInit() {
-     this.employeeArray$ = this.employeesvr.employeeList({});
+     this.employeeArray$ = this.employeesvr.employeeList({getTotal : '0'}).pipe(
+       map(re => re.list)
+     );
   }
   onValueSelected = () => {
     this.onValueChanged.emit(this._CURRENTVALUE);

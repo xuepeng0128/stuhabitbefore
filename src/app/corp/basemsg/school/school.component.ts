@@ -14,7 +14,7 @@ import {NzModalService} from 'ng-zorro-antd';
 export class SchoolComponent implements OnInit {
   user = this.usersvr.getUserStorage();
   schoolWinOrder$: Subject<{nowState: string , school: School}> = new Subject<{nowState: string , school: School}>() ;
-  schoolList$: Observable<Array<School>>;
+  schoolList$: Observable<Array<School>> = new Observable<Array<School>>();
   total = 0;
   queryParams = {
      schoolId : '',

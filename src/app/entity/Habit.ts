@@ -10,7 +10,7 @@ export class Habit {
   constructor(options: {habitId?: string, habitName?: string, habitClass?: string, memo?: string, vedioUrl?: string, audioUrl?: string, picUrl?: string} = {}) {
     this.habitId = options.habitId || '';
     this.habitName = options.habitName || '';
-    this.habitClass = options.habitClass || '';
+    this.habitClass = options.habitClass || '1';
     this.memo = options.memo || '';
     this.vedioUrl = options.vedioUrl || '';
     this.audioUrl = options.audioUrl || '';

@@ -3,6 +3,8 @@ import {Observable} from 'rxjs';
 import {Teacher} from '../../../entity/Teacher';
 import {TeacherService} from '../../../shared/service/basemsg/teacher.service';
 import {map} from 'rxjs/operators';
+import {UserService} from '../../../shared/user.service';
+import {User} from '../../../entity/User';
 
 @Component({
   selector: 'app-teacher',
@@ -10,6 +12,7 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./teacher.component.css']
 })
 export class TeacherComponent implements OnInit {
+  user: User = this.usersvr.getUserStorage();
   teacherList$: Observable<Array<Teacher>> = new Observable<Array<Teacher>>() ;
   total = 0;
   queryParams = {
@@ -21,7 +24,7 @@ export class TeacherComponent implements OnInit {
     pageNo : 1,
     getTotal : '1'
   };
-  constructor(private teachersvr: TeacherService) { }
+  constructor(private teachersvr: TeacherService, private  usersvr: UserService) { }
 
   ngOnInit() {
   }
@@ -46,6 +49,6 @@ export class TeacherComponent implements OnInit {
     );
   }
   onExcelExport = () => {
-    this.teachersvr.onExport(this.queryParams).subscribe()
+    this.teachersvr.onExport(this.queryParams).subscribe();
   }
 }

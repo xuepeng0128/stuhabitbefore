@@ -1,10 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {combineLatest, iif, Subject} from 'rxjs';
-import {School} from '../../../entity/School';
-import {SchoolService} from '../../../shared/service/basemsg/school.service';
 import {NzMessageService, UploadFile} from 'ng-zorro-antd';
-import {EmployeeService} from '../../../shared/service/system/employee.service';
-import {DistrictService} from '../../../shared/service/baseapi/district.service';
+
 import {isNullOrUndefined} from 'util';
 import {MSG_SAVE_ERROR, MSG_SAVE_SUCCESS} from '../../../shared/SysMessage';
 import {Habit} from '../../../entity/Habit';
@@ -17,7 +14,7 @@ import {ISupUploadfiles} from '../../../shared/interface/ISupUploadfiles';
   styleUrls: ['./win-habit.component.css']
 })
 export class WinHabitComponent implements OnInit {
-  @Input() habitWinOrder$: Subject<{nowState: string , habit: Habit}> ;
+  @Input() habitWinOrder$: Subject<{nowState: string , habit: Habit}> = new Subject<{nowState: string , habit: Habit}>();
   @Output() onHabitSaved: EventEmitter<Habit> = new EventEmitter<Habit>();
 
   uploadFilePath = '';
@@ -69,20 +66,21 @@ export class WinHabitComponent implements OnInit {
       } else if (re.nowState === 'edit') {
         this.currentHabit = re.habit;
       }
+      this.isHabitModalShow=true;
     });
   }
 
   onSave = () => {
 
           iif (  () => this.nowState === 'add' ,
-                            this.habitsvr.insertHabit(this.currentHabit),
-                            this.habitsvr.updateHabit(this.currentHabit)
+                            this.habitsvr.insertTemplateHabit(this.currentHabit),
+                            this.habitsvr.updateTemplateHabit(this.currentHabit)
               ).subscribe(
                         re => {
                                 if (!isNullOrUndefined(re)) {
                                   this.message.create('success', MSG_SAVE_SUCCESS);
                                   this.onHabitSaved.emit(re);
-                                  this.isSchoolModalShow = false;
+                                  this.isHabitModalShow = false;
                                 } else {
                                   this.message.create('error', MSG_SAVE_ERROR);
                                 }

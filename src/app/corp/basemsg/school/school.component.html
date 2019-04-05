@@ -30,7 +30,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="6">地址</nz-form-label>
         <nz-form-control [nzSpan]="15">
-          <input nz-input [nzSize]="'default'" [(ngModel)]="queryParams.address" [ngModelOptions]="{standalone: true}">
+          <input nz-input [nzSize]="'default'" [(ngModel)]="queryParams.address" >
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -59,7 +59,7 @@
         nzBordered
         nzShowSizeChanger
         [nzFrontPagination]="false"
-        [nzData]="schoolList$ | async"
+        [nzData]="schoolList$| async "
         [nzTotal]="total"
         [(nzPageIndex)]="queryParams.pageNo"
         [(nzPageSize)]="queryParams.pageSize"
@@ -88,7 +88,7 @@
           <td>{{data.district?.districtName}}</td>
           <td>{{data.address | cutSizePipe:18}}</td>
           <td>{{data.schoolStyle==='1' ? '小学' :'初中'}}</td>
-          <td>{{data.saleMan.employeeName}}</td>
+          <td>{{data.saleMan?.employeeName}}</td>
           <td>{{data.regTime | date: 'yyyy-MM-dd' }}</td>
 
           <td>
