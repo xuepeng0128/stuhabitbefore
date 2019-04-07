@@ -7,12 +7,15 @@ import { UserMgrComponent } from './user-mgr/user-mgr.component';
 import { SchoolAdminMgrComponent } from './school-admin-mgr/school-admin-mgr.component';
 import { PowerMgrComponent } from './power-mgr/power-mgr.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
+import {PubModule} from '../../pub/pub.module';
+import { TrainSchoolAdminComponent } from './train-school-admin/train-school-admin.component';
 
 @NgModule({
-  declarations: [EmployeeMgrComponent, UserMgrComponent, SchoolAdminMgrComponent,
-    PowerMgrComponent, ChangePasswordComponent, SchoolAdminMgrComponent],
+  declarations: [EmployeeMgrComponent, UserMgrComponent,
+    PowerMgrComponent, ChangePasswordComponent, SchoolAdminMgrComponent, TrainSchoolAdminComponent],
   imports: [
     CommonModule,
+    PubModule,
     SystemRoutingModule
   ]
 })

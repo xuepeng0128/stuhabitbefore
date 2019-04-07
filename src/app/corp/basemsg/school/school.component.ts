@@ -4,7 +4,8 @@ import {School} from '../../../entity/School';
 import {SchoolService} from '../../../shared/service/basemsg/school.service';
 import {UserService} from '../../../shared/user.service';
 import {flatMap, map} from 'rxjs/operators';
-import {NzModalService} from 'ng-zorro-antd';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
+import {ClassesService} from '../../../shared/service/basemsg/classes.service';
 
 @Component({
   selector: 'app-school',
@@ -26,7 +27,8 @@ export class SchoolComponent implements OnInit {
     pageNo : 1,
     getTotal : '1'
   };
-  constructor(private schoolsvr: SchoolService, private usersvr: UserService, private modalService: NzModalService) { }
+  constructor(private schoolsvr: SchoolService, private usersvr: UserService,
+              private modalService: NzModalService, private message: NzMessageService) { }
 
   ngOnInit() {
   }

@@ -5,7 +5,8 @@ import {EmployeeService} from '../../../shared/service/system/employee.service';
 import {flatMap, map} from 'rxjs/operators';
 import {School} from '../../../entity/School';
 import {UserService} from '../../../shared/user.service';
-import {NzModalService} from 'ng-zorro-antd';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
+import {ClassesService} from '../../../shared/service/basemsg/classes.service';
 
 @Component({
   selector: 'app-employee-mgr',
@@ -27,7 +28,8 @@ export class EmployeeMgrComponent implements OnInit {
   };
   employeeArray$: Observable<Array<Employee>> = new Observable<Array<Employee>>();
   total = 0;
-  constructor(private employeesvr: EmployeeService , private usersvr: UserService, private modalService: NzModalService) { }
+  constructor(private employeesvr: EmployeeService , private usersvr: UserService,
+              private modalService: NzModalService, private message: NzMessageService) { }
 
   ngOnInit() {
 

@@ -5,6 +5,8 @@ import {TeacherService} from '../../../shared/service/basemsg/teacher.service';
 import {map} from 'rxjs/operators';
 import {UserService} from '../../../shared/user.service';
 import {User} from '../../../entity/User';
+import {ClassesService} from '../../../shared/service/basemsg/classes.service';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-teacher',
@@ -24,7 +26,7 @@ export class TeacherComponent implements OnInit {
     pageNo : 1,
     getTotal : '1'
   };
-  constructor(private teachersvr: TeacherService, private  usersvr: UserService) { }
+  constructor(private teachersvr: TeacherService, private  usersvr: UserService, private message: NzMessageService) { }
 
   ngOnInit() {
   }

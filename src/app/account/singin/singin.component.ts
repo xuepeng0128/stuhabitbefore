@@ -19,7 +19,7 @@ export class SinginComponent implements OnInit {
   ngOnInit() {
   }
   onLogin = () => {
-    this.loading = false;
+    this.loading = true;
     this.usersvr.onvalidateLogin(this.user).subscribe(user => {
         if (user) {
           this.user = user;

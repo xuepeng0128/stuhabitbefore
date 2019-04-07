@@ -42,19 +42,19 @@ export class WinHabitComponent implements OnInit {
   handleImgPreview = (file: UploadFile) => {
     this.previewImage = file.url || file.thumbUrl;
     this.previewImgVisible = true;
-    this.currentHabit.picUrl = this.previewImage;
+  //  this.currentHabit.picUrl = this.previewImage;
   }
 
   handleVideoPreview = (file: ISupUploadfiles) => {
     this.previewVideo = file.url || file.thumbUrl ||  file.base64Data;
     this.previewVideoVisible = true;
-    this.currentHabit.videoUrl = this.previewVideo;
+ //   this.currentHabit.videoUrl = this.previewVideo;
   }
 
   handleAudioPreview = (file: ISupUploadfiles) => {
     this.previewAudio = file.url || file.thumbUrl ||  file.base64Data;
     this.previewAudioVisible = true;
-    this.currentHabit.audioUrl = this.previewAudio;
+   // this.currentHabit.audioUrl = this.previewAudio;
   }
 
 

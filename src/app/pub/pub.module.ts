@@ -16,13 +16,18 @@ import {YearSelectComponent} from './components/year-select/year-select.componen
 import { TeacherChooseComponent } from './components/teacher-choose/teacher-choose.component';
 import {ArrayTextFilterPipe} from './pipe/array-text-filter.pipe';
 import {WinEmployeeComponent} from './components/win-employee/win-employee.component';
+import { StudySubjectSelectComponent } from './components/study-subject-select/study-subject-select.component';
+import { SchoolSelectComponent } from './components/school-select/school-select.component';
+import { CorpDutySelectComponent } from './components/corp-duty-select/corp-duty-select.component';
 
 
 
 @NgModule({
   declarations: [CitySelectComponent, DistrictSelectComponent, WinSchoolComponent,
     EmployeeSelectComponent, CutSizePipe, ArrayTextFilterPipe, WinEmployeeComponent,  HabitClassSelectComponent,
-    WinHabitComponent, WinClassesComponent, YearSelectComponent, TeacherChooseComponent],
+    WinHabitComponent, WinClassesComponent, YearSelectComponent, TeacherChooseComponent, StudySubjectSelectComponent,
+    SchoolSelectComponent,
+    CorpDutySelectComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -44,6 +49,10 @@ import {WinEmployeeComponent} from './components/win-employee/win-employee.compo
     YearSelectComponent,
     DistrictSelectComponent,
     EmployeeSelectComponent,
+    SchoolSelectComponent,
+    CorpDutySelectComponent,
+    HabitClassSelectComponent,
+    StudySubjectSelectComponent,
     CutSizePipe,
     ArrayTextFilterPipe
     ]

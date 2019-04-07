@@ -40,7 +40,7 @@ insertUser = (user: User ): Observable<User> => {
   }
 
   deleteUser = (account: string): Observable<string> => {
-    return this.httpsvr.onHttpGet('/api/corp/system/user/deleteUser', {account : account});
+    return this.httpsvr.onHttpGet('/api/corp/system/user/deleteUser', {account});
   }
 
 }

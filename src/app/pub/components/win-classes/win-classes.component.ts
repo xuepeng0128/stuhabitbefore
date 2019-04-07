@@ -4,7 +4,7 @@ import {Habit} from '../../../entity/Habit';
 import {HabitService} from '../../../shared/service/basemsg/habit.service';
 import {NzMessageService, UploadFile} from 'ng-zorro-antd';
 import {ISupUploadfiles} from '../../../shared/interface/ISupUploadfiles';
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined} from 'util';
 import {MSG_SAVE_ERROR, MSG_SAVE_SUCCESS} from '../../../shared/SysMessage';
 import {Classes} from '../../../entity/Classes';
 import {ClassesService} from '../../../shared/service/basemsg/classes.service';
@@ -33,11 +33,11 @@ export class WinClassesComponent implements OnInit {
       } else if (re.nowState === 'edit') {
         this.currentClasses = re.classes;
       }
-      this.isClassesModalShow=true;
+      this.isClassesModalShow = true;
     });
   }
 
-  importStudentExcel=() =>{
+  importStudentExcel = () => {
 
   }
   onSave = () => {

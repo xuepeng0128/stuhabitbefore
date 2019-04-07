@@ -14,7 +14,8 @@ export class TrainSchool {
     saleMans: Employee; // 业务员
 
 
-  constructor(trainSchoolId: string, trainSchoolName: string, trainSchoolStyle: TrainSchoolStyle, district: District, longitude: number, latitude: number, address: string, saleMans: Employee) {
+  constructor(trainSchoolId: string, trainSchoolName: string,
+              trainSchoolStyle: TrainSchoolStyle, district: District, longitude: number, latitude: number, address: string, saleMans: Employee) {
     this.trainSchoolId = trainSchoolId;
     this.trainSchoolName = trainSchoolName;
     this.trainSchoolStyle = trainSchoolStyle;

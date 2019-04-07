@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {UserService} from '../../../shared/user.service';
-import {NzModalService} from 'ng-zorro-antd';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {flatMap, map} from 'rxjs/operators';
 import {Habit} from '../../../entity/Habit';
 import {HabitService} from '../../../shared/service/basemsg/habit.service';
+import {ClassesService} from '../../../shared/service/basemsg/classes.service';
 
 @Component({
   selector: 'app-habit-template',
@@ -21,7 +22,7 @@ export class HabitTemplateComponent implements OnInit {
     habitClass : ''
   };
   constructor(private habitsvr: HabitService, private usersvr: UserService,
-              private modalService: NzModalService) { }
+              private modalService: NzModalService, private message: NzMessageService) { }
 
   ngOnInit() {
     this.onQuery();
@@ -42,6 +43,7 @@ export class HabitTemplateComponent implements OnInit {
   }
   onSaved = (habit: Habit) => {
     this.habitsvr.habitTemplateList(this.queryParams).subscribe(re =>
+
       this.habitArray = re
     );
   }

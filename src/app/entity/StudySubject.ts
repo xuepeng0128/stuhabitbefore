@@ -3,9 +3,9 @@ export class StudySubject {
      studySubjectName: string;
      habitClass: string ;
 
-  constructor(studySubjectId?: string, studySubjectName?: string,habitClass? : string) {
+  constructor(studySubjectId?: string, studySubjectName?: string, habitClass?: string) {
     this.studySubjectId = studySubjectId || '';
     this.studySubjectName = studySubjectName || '';
-    this.habitClass=habitClass || '1';
+    this.habitClass = habitClass || '1';
   }
 }

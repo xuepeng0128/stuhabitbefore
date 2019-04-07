@@ -13,16 +13,16 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 })
 export class HabitClassSelectComponent implements OnInit {
 
-  private _currentValue : string;
+  private _CURRENTVALUE : string;
   private onValueChangeCallBack: any = {};
 
 
   get currentValue(): string {
-    return this._currentValue;
+    return this._CURRENTVALUE;
   }
 
   set currentValue(value: string) {
-    this._currentValue = value;
+    this._CURRENTVALUE = value;
     this.onValueChangeCallBack(value);
   }
 
@@ -30,12 +30,13 @@ export class HabitClassSelectComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
   writeValue(obj: any): void {
     if (obj)
     {
-      this._currentValue = obj;
+      this._CURRENTVALUE = obj;
     }
   }
 

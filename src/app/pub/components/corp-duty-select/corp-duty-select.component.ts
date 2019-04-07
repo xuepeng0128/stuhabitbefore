@@ -1,26 +1,27 @@
 import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
-import {EmployeeService} from '../../../shared/service/system/employee.service';
 import {Observable} from 'rxjs';
 import {Employee} from '../../../entity/Employee';
+import {CorpDuty} from '../../../entity/CorpDuty';
 import {map} from 'rxjs/operators';
+import {CorpdutyService} from '../../../shared/service/dic/corpduty.service';
 
 @Component({
-  selector: 'app-employee-select',
-  templateUrl: './employee-select.component.html',
-  styleUrls: ['./employee-select.component.css'],
+  selector: 'app-corp-duty-select',
+  templateUrl: './corp-duty-select.component.html',
+  styleUrls: ['./corp-duty-select.component.css'],
   providers: [{
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => EmployeeSelectComponent),
-  multi: true
-}]
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => CorpDutySelectComponent),
+    multi: true
+  }]
 })
-export class EmployeeSelectComponent implements OnInit {
-  // 默認顯示
+export class CorpDutySelectComponent implements OnInit {
+// 默認顯示
   @Input() defaultShow: string;
   // 当选择的值发生变化，激发事件
   @Output() onValueChanged: EventEmitter<any> = new EventEmitter<any>();
-  employeeArray$: Observable<Array<Employee>>;
+  corpDutyArray$: Observable<Array<CorpDuty>>;
   private _CURRENTVALUE = '0'; // 市州选择 ngModel
   private onValueChangeCallBack: any = {};
 
@@ -47,12 +48,14 @@ export class EmployeeSelectComponent implements OnInit {
 
   registerOnTouched(fn: any): void {
   }
-  constructor(private employeesvr: EmployeeService) { }
+  constructor(private corpDutysvr: CorpdutyService) { }
 
   ngOnInit() {
-     this.employeeArray$ = this.employeesvr.employeeList({pageSize : 1000, pageNo: 1, getTotal : '0'}).pipe(
-       map(re => [new Employee({paperId : '0', employeeName : this.defaultShow})].concat(re.list))
-     );
+    this.corpDutyArray$ = this.corpDutysvr.corpDutyList().pipe(
+      map(
+      re =>  [new CorpDuty({corpDutyId : '0', corpDutyName : this.defaultShow, master : false})].concat(re)
+         )
+    );
   }
   onValueSelected = () => {
     this.onValueChanged.emit(this._CURRENTVALUE);

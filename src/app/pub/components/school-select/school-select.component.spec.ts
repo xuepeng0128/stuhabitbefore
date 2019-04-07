@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QuestionTypeComponent } from './question-type.component';
+import { SchoolSelectComponent } from './school-select.component';
 
-describe('QuestionTypeComponent', () => {
-  let component: QuestionTypeComponent;
-  let fixture: ComponentFixture<QuestionTypeComponent>;
+describe('SchoolSelectComponent', () => {
+  let component: SchoolSelectComponent;
+  let fixture: ComponentFixture<SchoolSelectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuestionTypeComponent ]
+      declarations: [ SchoolSelectComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuestionTypeComponent);
+    fixture = TestBed.createComponent(SchoolSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

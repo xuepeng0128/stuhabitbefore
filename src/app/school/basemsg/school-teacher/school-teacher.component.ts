@@ -5,7 +5,8 @@ import {TeacherService} from '../../../shared/service/basemsg/teacher.service';
 import {map} from 'rxjs/operators';
 import {User} from '../../../entity/User';
 import {UserService} from '../../../shared/user.service';
-import {UploadFile} from 'ng-zorro-antd';
+import {NzMessageService, UploadFile} from 'ng-zorro-antd';
+import {ClassesService} from '../../../shared/service/basemsg/classes.service';
 
 @Component({
   selector: 'app-school-teacher',
@@ -26,7 +27,7 @@ queryParams = {
     pageNo : 1,
     getTotal : '1'
   };
-constructor(private teachersvr: TeacherService, private  usersvr: UserService ) { }
+constructor(private teachersvr: TeacherService, private  usersvr: UserService, private message: NzMessageService ) { }
 
 ngOnInit() {
   this.onQuery();

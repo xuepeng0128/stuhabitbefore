@@ -5,6 +5,7 @@ import {School} from '../../../entity/School';
 import {UserService} from '../../../shared/user.service';
 import {ClassesService} from '../../../shared/service/basemsg/classes.service';
 import {CommonService} from '../../../shared/common.service';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-school-classes',
@@ -21,7 +22,8 @@ export class SchoolClassesComponent implements OnInit {
     schoolId : this.user.teacher.onserve.school.schoolId,
     headmasterName : ''
   };
-  constructor(private usersvr: UserService, private classessvr: ClassesService, public  commonsvr: CommonService) { }
+  constructor(private usersvr: UserService, private classessvr: ClassesService,
+              public  commonsvr: CommonService, private message: NzMessageService) { }
 
   ngOnInit() {
   }

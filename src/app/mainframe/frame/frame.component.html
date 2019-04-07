@@ -6,7 +6,7 @@
   <nz-layout>
     <nz-sider [nzWidth]="200" style="background:#fff;overflow: auto; height: 100vh; position: fixed; left: 0;top:64px;">
       <ul nz-menu [nzMode]="'inline'" style="height:100%">
-        <li nz-submenu *ngFor="let menu of user.powerMenu ">
+        <li nz-submenu *ngFor="let menu of menuArray$ |async ">
           <span title><i class="anticon anticon-profile" [routerLink]="menu.url"></i>{{menu.menuName}}</span>
           <ul>
             <!--<li nz-menu-item *ngFor="let submenu of menu.subMenus" [routerLink]="submenu.url" [queryParams]="{power : submenu.opPower}"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" (click)="pareMenuName=menu.menuName;subMenuName=submenu.menuName;">{{submenu.menuName}}</li>-->

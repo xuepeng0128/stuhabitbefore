@@ -22,9 +22,6 @@
         <th>习惯编号</th>
         <th>习惯名称</th>
         <th>描述</th>
-        <th>视频</th>
-        <th>音频</th>
-        <th>图片</th>
         <th>操作</th>
       </tr>
       </thead>
@@ -42,9 +39,6 @@
         <td>{{data.habitId}}</td>
         <td>{{data.habitName}}</td>
         <td>{{data.memo}}</td>
-        <td><video [src]="data.vedioUrl"  class="mediarect"></video> </td>
-        <td><audio [src]="data.audioUrl" class="mediarect"></audio> </td>
-        <td><img [src]="data.picUrl" class="mediarect"></td>
 
         <td>
           <a href="javaScript:;" *ngIf="user.supperAdmin " (click)="onEdit(data)">修改</a>

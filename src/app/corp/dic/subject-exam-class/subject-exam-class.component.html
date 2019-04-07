@@ -3,7 +3,7 @@
 <div class="m-t-sm text-center" nz-row>
   <div nz-col [nzSpan]="24" class="text-center">
     <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onQuery()">查询</a>
-    <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onAdd()">新增加</a>
+    <a href="javaScript:;" class="ant-btn ant-btn-primary" (click)="onAdd()">新增</a>
   </div>
 </div>
 <div class="m-t-sm" nz-row>
@@ -13,31 +13,23 @@
       nzBordered
       nzShowSizeChanger
       [nzFrontPagination]="false"
-      [nzData]="studySubjectArray"
+      [nzData]="subjectExamClassArray"
     >
       <thead >
       <tr>
         <th>序号</th>
-        <th>习惯大类</th>
-        <th>学科编号</th>
-        <th>学科名称</th>
+        <th>学科</th>
+        <th>编号</th>
+        <th>题型</th>
         <th>操作</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let data of ajaxTable.data ;let no=index">
         <td>{{no+1}}</td>
-        <td [ngSwitch]="data.habitClass">
-          <b *ngSwitchCase="1" > 德</b>
-          <b *ngSwitchCase="2" > 智</b>
-          <b *ngSwitchCase="3" > 体</b>
-          <b *ngSwitchCase="4" > 美</b>
-          <b *ngSwitchCase="5" > 劳</b>
-          <b *ngSwitchDefault> 劳</b>
-        </td>
-        <td>{{data.studySubjectId}}</td>
-        <td>{{data.studySubjectName}}</td>
-
+        <td>{{data.studySubject.studySubjectName}}</td>
+        <td>{{data.subjectExamClassId}}</td>
+        <td>{{data.subjectExamClassName}}</td>
         <td>
           <a href="javaScript:;" *ngIf="user.supperAdmin " (click)="onEdit(data)">修改</a>
           <nz-divider nzType="vertical"></nz-divider>
@@ -49,10 +41,10 @@
   </div>
 </div>
 
-<nz-modal [(nzVisible)]="isStudySubjectModalShow"
+<nz-modal [(nzVisible)]="isSubjectExamClassModalShow"
           [nzTitle]="'科目'"
           [nzCancelText]="'关闭'"
-          (nzOnCancel)="isStudySubjectModalShow=false"
+          (nzOnCancel)="isSubjectExamClassModalShow=false"
           [nzOkText]="'保存'"
           (nzOnOk)="onSave()"
           [nzMaskClosable]="false"
@@ -64,7 +56,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="6">编号</nz-form-label>
         <nz-form-control [nzSpan]="17">
-          <input nz-input [(ngModel)]="currentStudySubject.studySubjectId"  >
+          <input nz-input [(ngModel)]="currentSubjectExamClass.subjectExamClassId"  >
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -72,15 +64,15 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="6">名称</nz-form-label>
         <nz-form-control [nzSpan]="17">
-          <input nz-input [(ngModel)]="currentStudySubject.studySubjectName" >
+          <input nz-input [(ngModel)]="currentSubjectExamClass.subjectExamClassName" >
         </nz-form-control>
       </nz-form-item>
     </div>
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label [nzSpan]="8">习惯大类</nz-form-label>
+        <nz-form-label [nzSpan]="8">学科</nz-form-label>
         <nz-form-control [nzSpan]="12" [nzOffset]="4">
-          <app-habit-class-select [(ngModel)]="currentStudySubject.habitClass" ></app-habit-class-select>
+         <app-study-subject-select [(ngModel)]="currentSubjectExamClass.studySubject.studySubjectId" [defaultShow]="'请选择'"></app-study-subject-select>
         </nz-form-control>
       </nz-form-item>
     </div>
