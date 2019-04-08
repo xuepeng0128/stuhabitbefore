@@ -39,84 +39,56 @@
     <div nz-row>
       <div nz-col [nzSpan]="24">
         <nz-form-item>
-          <nz-form-label [nzSpan]="6">描述</nz-form-label>
-          <nz-form-control [nzSpan]="17">
-            <textarea></textarea>
+          <nz-form-label [nzSpan]="6">代课老师</nz-form-label>
+          <nz-form-control [nzSpan]="17" >
+            <nz-tag *ngFor="let t of currentClasses.assTeachers" nzMode="checkable" [nzChecked]="true" (nzOnClose)="onRemoveAssTeacher(t)" >{{t.teacherName}}</nz-tag>
           </nz-form-control>
         </nz-form-item>
       </div>
     </div>
-    <div nz-row>
-      <div nz-col [nzSpan]="24">
-        <nz-form-item>
-          <nz-form-label [nzSpan]="6">图片</nz-form-label>
-          <nz-form-control [nzSpan]="17">
-            <nz-upload
-              [nzAction]="uploadFilePath"
-              nzListType="picture-card"
-              [(nzFileList)]="picFileList"
-              [nzShowButton]="picFileList.length < 2"
-              [nzPreview]="handleImgPreview">
-              <i nz-icon type="plus"></i>
-              <div class="ant-upload-text">上传图片</div>
-            </nz-upload>
-            <nz-modal  [nzVisible]="previewImgVisible" [nzContent]="modalPicContent" [nzFooter]="null" (nzOnCancel)="previewImgVisible=false;">
-              <ng-template #modalPicContent>
-                <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }"  />
-              </ng-template>
-            </nz-modal>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="24">
+      <a [href]="templateFilePath" > [模板下载]</a>
+      <nz-upload nzAction="/api/school/basemsg/student/importStudent"   (nzChange)="handleDataChange($event)">
+        <button nz-button><i nz-icon type="upload"></i><span>导入</span></button>
+      </nz-upload>
     </div>
-    <div nz-row>
-      <div nz-col [nzSpan]="24">
-        <nz-form-item>
-          <nz-form-label [nzSpan]="6">视频</nz-form-label>
-          <nz-form-control [nzSpan]="17">
-            <nz-upload
-              [nzAction]="uploadFilePath"
-              nzListType="picture-card"
-              [(nzFileList)]="videoFileList"
-              [nzShowButton]="videoFileList.length < 2"
-              [nzPreview]="handleVideoPreview"
-            >
-              <i nz-icon type="plus"></i>
-              <div class="ant-upload-text">上传视频</div>
-            </nz-upload>
-            <nz-modal [nzVisible]="previewVideoVisible" [nzContent]="modalVideoContent" [nzFooter]="null" (nzOnCancel)="previewVideoVisible=false; ">
-              <ng-template #modalVideoContent>
-                <video [src]="previewVideo" [ngStyle]="{ 'width': '100%' }" controls="controls"></video>
-              </ng-template>
-            </nz-modal>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">学生</nz-form-label>
+        <nz-form-control [nzSpan]="17">
+          <nz-table
+            #ajaxTable_student
+            nzBordered
+            [nzScroll]="{ y: '240px' }"
+            [nzHideOnSinglePage]="true"
+            [nzFrontPagination]="false"
+            [nzScroll]="{ y: '240px' }"
+            [nzData]="currentClasses.students"
+          >
+            <thead>
+            <tr>
+              <th>身份证号</th>
+              <th>名称</th>
+              <th>电话</th>
+              <th>住址</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of ajaxTable_student.data">
+              <td align="center">{{data.paperId}}</td>
+              <td align="center">{{data.studentName}}</td>
+              <td align="center">{{data.tel}}</td>
+              <td align="center">{{data.address}}</td>
+            </tr>
+            </tbody>
+          </nz-table>
+        </nz-form-control>
+      </nz-form-item>
     </div>
-
-    <div nz-row>
-      <div nz-col [nzSpan]="24">
-        <nz-form-item>
-          <nz-form-label [nzSpan]="6">音频</nz-form-label>
-          <nz-form-control [nzSpan]="17">
-            <nz-upload
-              [nzAction]="uploadFilePath"
-              nzListType="picture-card"
-              [(nzFileList)]="audioFileList"
-              [nzShowButton]="audioFileList.length < 2"
-              [nzPreview]="handleAudioPreview"
-            >
-              <i nz-icon type="plus"></i>
-              <div class="ant-upload-text">上传音频</div>
-            </nz-upload>
-            <nz-modal [nzVisible]="previewAudioVisible" [nzContent]="modalAudioContent" [nzFooter]="null" (nzOnCancel)="previewAudioVisible=false; instDetailWin.show();">
-              <ng-template #modalAudioContent>
-                <audio [src]="previewAudio" [ngStyle]="{ 'width': '100%' }" controls="controls"></audio>
-              </ng-template>
-            </nz-modal>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
+  </div>
 
 </nz-modal>
+<app-teacher-choose [teacherChooseSign$]="teacherChooseSign$" (onTeacherChoosed)="onTeacherChoosed($event)" ></app-teacher-choose>

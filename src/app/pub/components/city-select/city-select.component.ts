@@ -1,9 +1,11 @@
 import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Employee} from '../../../entity/Employee';
-import {EmployeeService} from '../../../shared/service/system/employee.service';
+import {from, Observable, of} from 'rxjs';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {City} from '../../../entity/City';
+import {DistrictService} from '../../../shared/service/dic/district.service';
+import {District} from '../../../entity/District';
+import {List} from 'linqts';
+import {distinct, flatMap, map, mergeScan, takeLast} from 'rxjs/operators';
 
 @Component({
   selector: 'app-city-select',
@@ -17,6 +19,7 @@ import {City} from '../../../entity/City';
 })
 export class CitySelectComponent implements OnInit {
 // 默認顯示
+  @Input() defaultShow: string;
   // 当选择的值发生变化，激发事件
   @Output() onValueChanged: EventEmitter<any> = new EventEmitter<any>();
   cityArray$: Observable<Array<City>>;
@@ -46,10 +49,19 @@ export class CitySelectComponent implements OnInit {
 
   registerOnTouched(fn: any): void {
   }
-  constructor() { }
+  constructor(private  districtsvr: DistrictService) { }
 
   ngOnInit() {
-    this.cityArray$ = null;
+    this.cityArray$ = of(this.districtsvr.getDistrictsStorage()).pipe(
+      map(re => [
+        new District({city : new City('0', this.defaultShow) })
+      ].concat(re)),
+      flatMap( (re: Array<District>) => from(re)),
+      map( singled => singled.city ),
+      distinct(),
+      mergeScan((acc, cur) => of([...acc, cur]), new Array<City>()),
+      takeLast(1)
+    );
   }
   onValueSelected = () => {
     this.onValueChanged.emit(this._CURRENTVALUE);

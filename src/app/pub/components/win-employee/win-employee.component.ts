@@ -9,6 +9,7 @@ import {flatMap} from 'rxjs/operators';
 import {isNullOrUndefined} from 'util';
 import {MSG_SAVE_ERROR, MSG_SAVE_SUCCESS} from '../../../shared/SysMessage';
 import {Employee} from '../../../entity/Employee';
+import {CorpDuty} from '../../../entity/CorpDuty';
 
 @Component({
   selector: 'app-win-employee',
@@ -18,7 +19,7 @@ import {Employee} from '../../../entity/Employee';
 export class WinEmployeeComponent implements OnInit {
   @Input() employeeWinOrder$: Subject<{nowState: string , employee: Employee}> ;
   @Output() onEmployeeSaved: EventEmitter<Employee> = new EventEmitter<Employee>();
-  currentEmployee: Employee = new Employee({});
+  currentEmployee: Employee = new Employee({duty : new CorpDuty({})});
   isEmployeeModalShow = false;
   nowState = 'browse';
   constructor( private message: NzMessageService,
@@ -27,7 +28,7 @@ export class WinEmployeeComponent implements OnInit {
   ngOnInit() {
     this.employeeWinOrder$.subscribe(re => {
       if (re.nowState === 'add') {
-        this.currentEmployee = new Employee({});
+        this.currentEmployee = new Employee({duty : new CorpDuty({})});
       } else if (re.nowState === 'edit') {
         this.currentEmployee = re.employee;
       }

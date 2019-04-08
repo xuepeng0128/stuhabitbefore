@@ -21,7 +21,11 @@
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
-
+      <nz-form-item class="m-t-lg">
+        <nz-form-control>
+          <nz-progress [nzPercent]="pro" nzStatus="active"></nz-progress>
+        </nz-form-control>
+      </nz-form-item>
       <nz-form-item class="m-t-lg">
         <nz-form-control>
           <button  class="login-form-button"  nz-button  nzType="primary" [disabled]="user.account==''"  [nzLoading]="loading" (click)="onLogin()"  >登录</button>

@@ -1,9 +1,9 @@
-import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {concat, Observable, of} from 'rxjs';
 import {City} from '../../../entity/City';
-import {DistrictService} from '../../../shared/service/baseapi/district.service';
 import {District} from '../../../entity/District';
+import {DistrictService} from '../../../shared/service/dic/district.service';
 
 @Component({
   selector: 'app-district-select',
@@ -15,17 +15,19 @@ import {District} from '../../../entity/District';
     multi: true
   }]
 })
-export class DistrictSelectComponent implements OnInit {
-  // 当选择的值发生变化，激发事件
-  @Output() onValueChanged: EventEmitter<any> = new EventEmitter<any>();
-  private _CURRENTVALUE = '0'; // 市州选择 ngModel
+export class DistrictSelectComponent implements OnInit , OnChanges {
+  // 默認顯示
+  @Input() defaultShow: string;
+  @Input() cityId: string ; // 选择的市州
+  private _CURRENTVALUE = '0'; // 区县选择 ngModel
   private onValueChangeCallBack: any = {};
 
-  districtArray$: Observable<Array<{cityName: string , districts: Array<District>}>>
-    = new Observable<Array<{cityName: string , districts: Array<District>}>>();
-  constructor(private districtsvr: DistrictService) { }
+  // 区县列表
+  public   districtArray: Array<District> = new Array<District>();
+
   get currentValue(): string {
     return this._CURRENTVALUE;
+
   }
 
   set currentValue(value: string) {
@@ -47,11 +49,25 @@ export class DistrictSelectComponent implements OnInit {
 
   registerOnTouched(fn: any): void {
   }
+  constructor(private districtsvr: DistrictService) { }
+
+
   ngOnInit() {
-    this.districtArray$ = this.districtsvr.cityDistrictList();
   }
-  onValueSelected = () => {
-    this.onValueChanged.emit(this._CURRENTVALUE);
+
+  ngOnChanges(changes: SimpleChanges): void {
+    let arealist: Array<District> = new Array<District>();
+    if (this.cityId === '0') {
+      arealist = new Array<District>();
+    } else {
+      // 根据市州id 过滤出所属区县
+      arealist = this.districtsvr.getDistrictsStorage().filter(o => o.city.cityId === this.cityId);
+    }
+    this._CURRENTVALUE = '0';
+
+    arealist.splice(0, 0, new District({districtId : '0', districtName: this.defaultShow}));
+    this.districtArray = arealist;
+
   }
 
 }

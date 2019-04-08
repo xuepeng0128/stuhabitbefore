@@ -33,7 +33,7 @@ export class EmployeeMgrComponent implements OnInit {
 
   ngOnInit() {
 
-
+  this.onQuery();
 
   }
   onQuery = () => {

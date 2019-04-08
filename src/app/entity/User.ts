@@ -5,6 +5,7 @@ import {Menu} from './Menu';
 import {TrainSchool} from './TrainSchool';
 
 export class User {
+  userId: string ;
   account: string; // 账号
   passWord: string; // 密码
   employee: Employee; // 员工用户(为空，非员工用户)

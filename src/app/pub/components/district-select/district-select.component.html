@@ -1,8 +1,5 @@
-<nz-select style="width: 120px;" nzPlaceHolder="请选择..." nzAllowClear [ngModel]="currentValue" (change)="onValueSelected()" >
-  <ng-container *ngFor="let item of districtArray$ |async">
-    <nz-option-group [nzLabel]="item.cityName">
-      <nz-option *ngFor="let dis of item.districts" [nzValue]=" dis.districtId" [nzLabel]="dis.districtName"></nz-option>
-    </nz-option-group>
-  </ng-container>
+
+<nz-select [nzSize]="'default'" [(ngModel)]="currentValue" >
+  <nz-option *ngFor="let item of districtArray " [nzLabel]="item.districtName" [nzValue]="item.districtId"></nz-option>
 </nz-select>
 

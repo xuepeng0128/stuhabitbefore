@@ -5,7 +5,7 @@ import {UserService} from '../../../shared/user.service';
 import {TeacherdutyService} from '../../../shared/service/dic/teacherduty.service';
 import {iif} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
-import {NzMessageService} from 'ng-zorro-antd';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {MSG_SAVE_ERROR, MSG_SAVE_SUCCESS} from '../../../shared/SysMessage';
 
 @Component({
@@ -19,7 +19,8 @@ export class TeacherDutyComponent implements OnInit {
   teacherdutyArray: Array<TeacherDuty> = new Array<TeacherDuty>();
   currentTeacherDuty: TeacherDuty = new TeacherDuty({});
   editState = 'browse';
-  constructor(private usersvr: UserService, private teacherdutysvr: TeacherdutyService, private message: NzMessageService) { }
+  constructor(private usersvr: UserService, private teacherdutysvr: TeacherdutyService,
+              private message: NzMessageService , private modalService: NzModalService) { }
 
   ngOnInit() {
     this.onQuery();
@@ -44,7 +45,7 @@ export class TeacherDutyComponent implements OnInit {
       () => this.editState === 'add',
       this.teacherdutysvr.insertTeacherDuty(this.currentTeacherDuty),
       this.teacherdutysvr.updateTeacherDuty(this.currentTeacherDuty)
-    ).subscribe(re =>{
+    ).subscribe(re => {
       if (re) {
         this.message.create('success', MSG_SAVE_SUCCESS);
         this.onQuery();
@@ -56,10 +57,16 @@ export class TeacherDutyComponent implements OnInit {
     });
   }
   onDelete = (teacherDuty: TeacherDuty) => {
-    this.teacherdutysvr.deleteTeacherDuty(teacherDuty).pipe(
-      switchMap(() => this.teacherdutysvr.teacherDutyList())
-    ).subscribe( re => {
-      this.teacherdutyArray = re ;
+    this.modalService.confirm({
+      nzTitle: '<i>提示</i>',
+      nzContent: '<b>确定删除该数据吗?</b>',
+      nzOnOk: () => {
+        this.teacherdutysvr.deleteTeacherDuty(teacherDuty).pipe(
+          switchMap(() => this.teacherdutysvr.teacherDutyList())
+        ).subscribe( re => {
+          this.teacherdutyArray = re ;
+        });
+      }
     });
   }
 }

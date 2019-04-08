@@ -3,7 +3,7 @@
           [nzCancelText]="'关闭'"
           (nzOnCancel)="isTeacherChooseModalShow=false"
           [nzOkText]="'保存'"
-          (nzOnOk)="onSave()"
+          (nzOnOk)="onMulChoose()"
           [nzMaskClosable]="false"
           [nzWidth]="800"
 >
@@ -17,7 +17,7 @@
       [nzScroll]="{ y: '240px' }"
       [nzHideOnSinglePage]="true"
       [nzFrontPagination]="false"
-      [nzData]="teacherList$ |async"
+      [nzData]="teacherList"
     >
       <thead>
       <tr>
@@ -34,7 +34,7 @@
         <td align="center">{{data.paperId}}</td>
         <td align="center">{{data.teacherName}}</td>
         <td align="center">{{data.teacherDuty.teacherDutyName}}</td>
-        <td align="center" *ngIf="singleChoose"><a href="javascript:;"  (click)="onChoose(data)">[选择]</a> </td>
+        <td align="center" *ngIf="singleChoose"><a href="javascript:;"  (click)="onSingleChoose(data)">[选择]</a> </td>
       </tr>
       </tbody>
     </nz-table>
