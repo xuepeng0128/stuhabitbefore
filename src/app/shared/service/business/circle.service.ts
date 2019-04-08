@@ -13,7 +13,9 @@ export class CircleService {
   allCircleList = (queryparams: any): Observable<{list: Array<Circle>, total: number}> => {
     return this.httpsvr.onHttpGet('/api/corp/basemsg/circle/allcircleList', queryparams);
   }
-
+ schoolCircleList =(queryParams : any) : Observable<{list: Array<Circle>, total: number}> => {
+   return this.httpsvr.onHttpGet('/api/corp/basemsg/circle/schoolCircleList', queryParams);
+ }
   insertCircle = (circle: Circle): Observable<Circle> => {
     return this.httpsvr.onHttpPost('/api/school/buisness/circle/insertCircle', circle);
   }

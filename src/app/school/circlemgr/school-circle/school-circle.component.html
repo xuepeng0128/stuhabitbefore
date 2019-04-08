@@ -10,9 +10,15 @@
   </div>
   <div nz-col [nzSpan]="8">
     <nz-form-item>
-      <nz-form-label [nzSpan]="6">姓名</nz-form-label>
+      <nz-form-label [nzSpan]="6">年级</nz-form-label>
       <nz-form-control [nzSpan]="15">
-        <input nz-input [(ngModel)]="queryParams.studentName">
+        <nz-input-number
+          [(ngModel)]="queryParams.grade"
+          [nzMin]="1"
+          [nzMax]="10"
+          [nzStep]="1"
+          [nzDisabled]="isDisabled"
+        ></nz-input-number>
       </nz-form-control>
     </nz-form-item>
   </div>
