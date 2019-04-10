@@ -37,7 +37,8 @@ export class WinEmployeeComponent implements OnInit {
   }
 
   onSave = () => {
-    // 补全school区，employee
+
+
 
           iif (() => this.nowState === 'add',
                           this.emloyeesvr.insertEmployee(this.currentEmployee),
@@ -53,4 +54,9 @@ export class WinEmployeeComponent implements OnInit {
         }
       });
   }
+
+
+
+
+
 }
